@@ -1,71 +1,99 @@
 <!DOCTYPE html>
-<html lang="uz" class="light">
+<html lang="uz" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>TeleAI — Sun'iy Intellekt Chat</title>
-    <!-- Inter shrifti -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
-                    },
-                    colors: {
-                        tg: {
-                            blue: '#3390ec',
-                            blueHover: '#2b7fd4',
-                            darkBg: '#0e1621',
-                            darkSidebar: '#17212b',
-                            darkHeader: '#17212b',
-                            darkHover: '#202b36',
-                            darkActive: '#2b5278',
-                            darkBubbleIn: '#182533',
-                            darkBubbleOut: '#2b5278',
-                            lightBubbleOut: '#effdde',
-                            lightActive: '#3390ec',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
     <style>
-        /* Asosiy shrift va balandlik sozlamalari */
-        html, body {
-            height: 100%;
+        /* ================= DESIGN TOKENS (LIGHT & DARK) ================= */
+        :root {
+            --bg-app: #ffffff;
+            --bg-sidebar: #ffffff;
+            --bg-header: #ffffff;
+            --bg-input-bar: #ffffff;
+            --bg-input: #f1f3f5;
+            --bg-hover: #f3f5f7;
+            --bg-active: #3390ec;
+            --bg-bubble-in: #ffffff;
+            --bg-bubble-out: #effdde;
+            --bg-modal: #ffffff;
+            --bg-card: rgba(255, 255, 255, 0.92);
+            --bg-card-btn: #f8fafc;
+            --bg-card-btn-hover: #eef6ff;
+            --border-color: #e4e8ec;
+            --text-primary: #111827;
+            --text-secondary: #6b7280;
+            --text-muted: #9ca3af;
+            --text-out-time: #4f9a5b;
+            --accent: #3390ec;
+            --accent-hover: #257ed6;
+            --accent-soft: rgba(51, 144, 236, 0.12);
+            --danger: #e53935;
+            --danger-soft: rgba(229, 57, 53, 0.1);
+            --online: #22c55e;
+            --shadow-sm: 0 1px 2px rgba(16, 24, 40, 0.08);
+            --shadow-md: 0 6px 24px rgba(16, 24, 40, 0.12);
+            --chat-bg-color: #c7ddc5;
+            --chat-pattern: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%234f7d57' stroke-width='1.2' stroke-opacity='0.14'%3E%3Cpath d='M18 22l8-4-3 9-5-5z'/%3E%3Ccircle cx='65' cy='24' r='6'/%3E%3Cpath d='M98 18c4 0 7 3 7 7s-3 7-7 7-7-3-7-7'/%3E%3Cpath d='M24 68c0-5 4-9 9-9s9 4 9 9-4 9-9 9'/%3E%3Cpath d='M62 64l10 6-10 6z'/%3E%3Crect x='92' y='60' width='12' height='12' rx='3'/%3E%3Cpath d='M16 102l6-8 6 8z'/%3E%3Ccircle cx='60' cy='102' r='4'/%3E%3Cpath d='M94 98l12 8M106 98l-12 8'/%3E%3C/g%3E%3C/svg%3E");
+            --inline-code-bg: rgba(51, 144, 236, 0.12);
+            --inline-code-color: #1967b8;
+        }
+
+        [data-theme="dark"] {
+            --bg-app: #0e1621;
+            --bg-sidebar: #17212b;
+            --bg-header: #17212b;
+            --bg-input-bar: #17212b;
+            --bg-input: #242f3d;
+            --bg-hover: #202b36;
+            --bg-active: #2b5278;
+            --bg-bubble-in: #182533;
+            --bg-bubble-out: #2b5278;
+            --bg-modal: #17212b;
+            --bg-card: rgba(23, 33, 43, 0.92);
+            --bg-card-btn: #202b36;
+            --bg-card-btn-hover: #283644;
+            --border-color: #101921;
+            --text-primary: #f1f5f9;
+            --text-secondary: #8ea0b2;
+            --text-muted: #6c7f92;
+            --text-out-time: #8ec5f8;
+            --accent: #5eb5f7;
+            --accent-hover: #4aa3e8;
+            --accent-soft: rgba(94, 181, 247, 0.15);
+            --danger: #f87171;
+            --danger-soft: rgba(248, 113, 113, 0.14);
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.35);
+            --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.55);
+            --chat-bg-color: #0e1621;
+            --chat-pattern: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%236c8eae' stroke-width='1.2' stroke-opacity='0.09'%3E%3Cpath d='M18 22l8-4-3 9-5-5z'/%3E%3Ccircle cx='65' cy='24' r='6'/%3E%3Cpath d='M98 18c4 0 7 3 7 7s-3 7-7 7-7-3-7-7'/%3E%3Cpath d='M24 68c0-5 4-9 9-9s9 4 9 9-4 9-9 9'/%3E%3Cpath d='M62 64l10 6-10 6z'/%3E%3Crect x='92' y='60' width='12' height='12' rx='3'/%3E%3Cpath d='M16 102l6-8 6 8z'/%3E%3Ccircle cx='60' cy='102' r='4'/%3E%3Cpath d='M94 98l12 8M106 98l-12 8'/%3E%3C/g%3E%3C/svg%3E");
+            --inline-code-bg: rgba(94, 181, 247, 0.16);
+            --inline-code-color: #8ccaff;
+        }
+
+        /* ================= ASOSIY STILLAR ================= */
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Inter', sans-serif;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-app);
+            color: var(--text-primary);
+            -webkit-font-smoothing: antialiased;
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* Telegram uslubidagi yumshoq naqshli chat foni (Light rejim) */
-        .tg-chat-bg {
-            background-color: #c8dec4;
-            background-image:
-                radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.35) 0%, transparent 45%),
-                radial-gradient(circle at 80% 80%, rgba(162, 207, 174, 0.45) 0%, transparent 50%),
-                url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%235b8a62' stroke-width='1.2' stroke-opacity='0.14'%3E%3Cpath d='M18 22l8-4-3 9-5-5z'/%3E%3Ccircle cx='65' cy='24' r='6'/%3E%3Cpath d='M98 18c4 0 7 3 7 7s-3 7-7 7-7-3-7-7'/%3E%3Cpath d='M24 68c0-5 4-9 9-9s9 4 9 9-4 9-9 9'/%3E%3Cpath d='M62 64l10 6-10 6z'/%3E%3Crect x='92' y='60' width='12' height='12' rx='3'/%3E%3Cpath d='M16 102l6-8 6 8z'/%3E%3Ccircle cx='60' cy='102' r='4'/%3E%3Cpath d='M94 98l12 8M106 98l-12 8'/%3E%3C/g%3E%3C/svg%3E");
+        button, input, textarea {
+            font-family: inherit;
         }
 
-        /* Telegram uslubidagi yumshoq naqshli chat foni (Dark rejim) */
-        .dark .tg-chat-bg {
-            background-color: #0e1621;
-            background-image:
-                radial-gradient(circle at 15% 25%, rgba(43, 82, 120, 0.22) 0%, transparent 45%),
-                radial-gradient(circle at 85% 75%, rgba(24, 37, 51, 0.4) 0%, transparent 50%),
-                url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%236c8eae' stroke-width='1.2' stroke-opacity='0.09'%3E%3Cpath d='M18 22l8-4-3 9-5-5z'/%3E%3Ccircle cx='65' cy='24' r='6'/%3E%3Cpath d='M98 18c4 0 7 3 7 7s-3 7-7 7-7-3-7-7'/%3E%3Cpath d='M24 68c0-5 4-9 9-9s9 4 9 9-4 9-9 9'/%3E%3Cpath d='M62 64l10 6-10 6z'/%3E%3Crect x='92' y='60' width='12' height='12' rx='3'/%3E%3Cpath d='M16 102l6-8 6 8z'/%3E%3Ccircle cx='60' cy='102' r='4'/%3E%3Cpath d='M94 98l12 8M106 98l-12 8'/%3E%3C/g%3E%3C/svg%3E");
-        }
-
-        /* Maxsus ingichka skrollbar */
+        /* Ingichka skrollbar */
         ::-webkit-scrollbar {
             width: 6px;
             height: 6px;
@@ -74,32 +102,570 @@
             background: transparent;
         }
         ::-webkit-scrollbar-thumb {
-            background: rgba(120, 130, 140, 0.35);
-            border-radius: 9999px;
+            background: rgba(130, 145, 160, 0.35);
+            border-radius: 999px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: rgba(120, 130, 140, 0.55);
+            background: rgba(130, 145, 160, 0.55);
         }
 
-        /* Yozmoqda... 3 nuqta animatsiyasi */
-        @keyframes tgBounce {
-            0%, 80%, 100% {
-                transform: scale(0.6);
-                opacity: 0.4;
-            }
-            40% {
-                transform: scale(1);
-                opacity: 1;
-            }
+        /* ================= ASOSIY JOYLASHUV ================= */
+        .app-shell {
+            display: flex;
+            width: 100%;
+            height: 100dvh;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
         }
-        .typing-dot {
-            animation: tgBounce 1.3s infinite ease-in-out both;
-        }
-        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
-        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
-        .typing-dot:nth-child(3) { animation-delay: 0s; }
 
-        /* Xabar chiqish animatsiyasi */
+        /* ================= CHAP PANEL (SIDEBAR) ================= */
+        .sidebar {
+            width: 340px;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--bg-sidebar);
+            border-right: 1px solid var(--border-color);
+            z-index: 20;
+        }
+
+        .sidebar-header {
+            padding: 12px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 0;
+        }
+
+        .brand-logo {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #229ED9, #3390ec);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(51, 144, 236, 0.35);
+        }
+
+        .brand-text h1 {
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+        }
+
+        .brand-text span {
+            font-size: 11px;
+            color: var(--text-secondary);
+            display: block;
+        }
+
+        .sidebar-actions {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .icon-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.16s, color 0.16s, transform 0.12s;
+        }
+
+        .icon-btn:hover {
+            background-color: var(--bg-hover);
+            color: var(--text-primary);
+        }
+
+        .icon-btn:active {
+            transform: scale(0.94);
+        }
+
+        .icon-btn.danger:hover {
+            background-color: var(--danger-soft);
+            color: var(--danger);
+        }
+
+        .new-chat-wrap {
+            padding: 10px 12px 6px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-new-chat {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 14px;
+            border-radius: 12px;
+            border: none;
+            background-color: #3390ec;
+            color: #ffffff;
+            font-size: 13.5px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(51, 144, 236, 0.25);
+            transition: background-color 0.16s, transform 0.12s;
+        }
+
+        .btn-new-chat:hover {
+            background-color: #257ed6;
+        }
+
+        .btn-new-chat:active {
+            transform: scale(0.98);
+        }
+
+        .search-wrap {
+            padding: 6px 12px 10px;
+            position: relative;
+        }
+
+        .search-box {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            color: var(--text-muted);
+            pointer-events: none;
+            display: flex;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 9px 34px 9px 36px;
+            border-radius: 20px;
+            border: 1.5px solid transparent;
+            background-color: var(--bg-input);
+            color: var(--text-primary);
+            font-size: 13.5px;
+            outline: none;
+            transition: border-color 0.16s, background-color 0.16s;
+        }
+
+        .search-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .search-input:focus {
+            border-color: var(--accent);
+        }
+
+        .search-clear {
+            position: absolute;
+            right: 8px;
+            width: 24px;
+            height: 24px;
+            border: none;
+            border-radius: 50%;
+            background: transparent;
+            color: var(--text-muted);
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .search-clear.visible {
+            display: flex;
+        }
+
+        .search-clear:hover {
+            color: var(--text-primary);
+        }
+
+        .chat-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 2px 8px 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .chat-item {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            padding: 9px 10px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background-color 0.14s;
+        }
+
+        .chat-item:hover {
+            background-color: var(--bg-hover);
+        }
+
+        .chat-item.active {
+            background-color: var(--bg-active);
+            color: #ffffff;
+        }
+
+        .chat-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            flex-shrink: 0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .chat-item-body {
+            flex: 1;
+            min-width: 0;
+            padding-right: 22px;
+        }
+
+        .chat-item-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            margin-bottom: 3px;
+        }
+
+        .chat-item-title {
+            font-size: 14px;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .chat-item-time {
+            font-size: 11px;
+            color: var(--text-muted);
+            flex-shrink: 0;
+        }
+
+        .chat-item.active .chat-item-time {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .chat-item-preview {
+            font-size: 12.5px;
+            color: var(--text-secondary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .chat-item.active .chat-item-preview {
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .chat-delete-btn {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.15s, background-color 0.15s, color 0.15s;
+        }
+
+        .chat-item:hover .chat-delete-btn,
+        .chat-item:focus-within .chat-delete-btn {
+            opacity: 1;
+        }
+
+        .chat-delete-btn:hover {
+            background-color: var(--danger-soft);
+            color: var(--danger);
+        }
+
+        .chat-item.active .chat-delete-btn {
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .chat-item.active .chat-delete-btn:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+        }
+
+        .sidebar-footer {
+            padding: 10px 14px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 11.5px;
+            color: var(--text-muted);
+        }
+
+        .empty-list {
+            text-align: center;
+            padding: 36px 16px;
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        /* ================= ASOSIY CHAT OYNASI ================= */
+        .chat-main {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            position: relative;
+        }
+
+        .chat-header {
+            height: 60px;
+            padding: 0 16px;
+            background-color: var(--bg-header);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            flex-shrink: 0;
+            z-index: 10;
+        }
+
+        .chat-header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 0;
+        }
+
+        .mobile-back-btn {
+            display: none;
+            margin-left: -6px;
+        }
+
+        .header-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            flex-shrink: 0;
+            position: relative;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .online-dot {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            background-color: var(--online);
+            border: 2px solid var(--bg-header);
+        }
+
+        .header-info {
+            min-width: 0;
+        }
+
+        .header-title {
+            font-size: 15px;
+            font-weight: 600;
+            line-height: 1.25;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .header-status {
+            font-size: 12.5px;
+            color: var(--accent);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .chat-header-right {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            flex-shrink: 0;
+        }
+
+        /* Telegram naqshli chat maydoni */
+        .messages-viewport {
+            flex: 1;
+            overflow-y: auto;
+            background-color: var(--chat-bg-color);
+            background-image:
+                radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.25) 0%, transparent 45%),
+                radial-gradient(circle at 80% 80%, rgba(51, 144, 236, 0.1) 0%, transparent 50%),
+                var(--chat-pattern);
+            padding: 16px 20px;
+            scroll-behavior: smooth;
+        }
+
+        .messages-inner {
+            max-width: 780px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            min-height: 100%;
+        }
+
+        .date-pill-wrap {
+            display: flex;
+            justify-content: center;
+            margin: 2px 0 6px;
+        }
+
+        .date-pill {
+            padding: 4px 12px;
+            border-radius: 999px;
+            font-size: 11.5px;
+            font-weight: 600;
+            background-color: rgba(15, 23, 42, 0.24);
+            color: #ffffff;
+            backdrop-filter: blur(4px);
+        }
+
+        [data-theme="dark"] .date-pill {
+            background-color: rgba(15, 23, 42, 0.6);
+        }
+
+        /* Kutib olish kartasi (Bo'sh chat) */
+        .welcome-wrap {
+            margin: auto 0;
+            padding: 20px 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .welcome-card {
+            width: 100%;
+            max-width: 540px;
+            background-color: var(--bg-card);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            border-radius: 22px;
+            padding: 26px 22px;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+        }
+
+        .welcome-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 14px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #229ED9, #3390ec);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 18px rgba(51, 144, 236, 0.35);
+        }
+
+        .welcome-card h2 {
+            font-size: 19px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .welcome-card p {
+            font-size: 13.5px;
+            color: var(--text-secondary);
+            line-height: 1.55;
+            margin-bottom: 20px;
+        }
+
+        .prompts-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            text-align: left;
+        }
+
+        .prompt-btn {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 12px;
+            border-radius: 14px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-card-btn);
+            color: var(--text-primary);
+            cursor: pointer;
+            text-align: left;
+            transition: background-color 0.15s, border-color 0.15s, transform 0.12s;
+        }
+
+        .prompt-btn:hover {
+            background-color: var(--bg-card-btn-hover);
+            border-color: var(--accent);
+        }
+
+        .prompt-btn:active {
+            transform: scale(0.98);
+        }
+
+        .prompt-emoji {
+            font-size: 18px;
+            line-height: 1.2;
+            flex-shrink: 0;
+        }
+
+        .prompt-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 2px;
+        }
+
+        .prompt-text {
+            font-size: 12.5px;
+            color: var(--text-primary);
+            line-height: 1.35;
+        }
+
+        /* ================= XABAR PUFAKCHALARI ================= */
         @keyframes msgPop {
             from {
                 opacity: 0;
@@ -110,1299 +676,1748 @@
                 transform: translateY(0) scale(1);
             }
         }
-        .msg-animate {
+
+        .msg-row {
+            display: flex;
+            width: 100%;
             animation: msgPop 0.2s ease-out forwards;
         }
 
-        /* Markdown kontenti uchun stillar */
+        .msg-row.user {
+            justify-content: flex-end;
+        }
+
+        .msg-row.model {
+            justify-content: flex-start;
+        }
+
+        .bubble {
+            max-width: 82%;
+            padding: 10px 14px;
+            border-radius: 18px;
+            box-shadow: var(--shadow-sm);
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .bubble.user {
+            background-color: var(--bg-bubble-out);
+            color: var(--text-primary);
+            border-bottom-right-radius: 4px;
+        }
+
+        .bubble.model {
+            background-color: var(--bg-bubble-in);
+            color: var(--text-primary);
+            border-bottom-left-radius: 4px;
+        }
+
+        .bubble.error {
+            border: 1px solid rgba(229, 57, 53, 0.35);
+        }
+
+        .user-text {
+            font-size: 14.5px;
+            line-height: 1.5;
+            white-space: pre-wrap;
+        }
+
+        .msg-meta {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 4px;
+            margin-top: 4px;
+        }
+
+        .msg-meta.model-meta {
+            justify-content: space-between;
+            margin-top: 8px;
+            padding-top: 6px;
+            border-top: 1px solid rgba(130, 145, 160, 0.14);
+        }
+
+        .msg-time {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .bubble.user .msg-time {
+            color: var(--text-out-time);
+        }
+
+        .ticks {
+            color: var(--accent);
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .copy-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            font-size: 11.5px;
+            font-weight: 500;
+            padding: 3px 6px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.15s, color 0.15s;
+        }
+
+        .copy-btn:hover {
+            background-color: var(--accent-soft);
+            color: var(--accent);
+        }
+
+        .retry-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 10px;
+            padding: 7px 14px;
+            border-radius: 10px;
+            border: none;
+            background-color: #3390ec;
+            color: #ffffff;
+            font-size: 12.5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.15s;
+        }
+
+        .retry-btn:hover {
+            background-color: #257ed6;
+        }
+
+        /* ================= MARKDOWN STILLARI ================= */
+        .md-content {
+            font-size: 14.5px;
+            line-height: 1.58;
+        }
+
         .md-content p {
-            margin-bottom: 0.5rem;
-            line-height: 1.55;
+            margin-bottom: 8px;
         }
         .md-content p:last-child {
             margin-bottom: 0;
         }
+
         .md-content h1, .md-content h2, .md-content h3 {
             font-weight: 700;
-            margin-top: 0.75rem;
-            margin-bottom: 0.4rem;
+            margin: 12px 0 6px;
             line-height: 1.3;
         }
-        .md-content h1 { font-size: 1.15rem; }
-        .md-content h2 { font-size: 1.05rem; }
-        .md-content h3 { font-size: 0.98rem; }
-        .md-content ul {
-            list-style-type: disc;
-            padding-left: 1.35rem;
-            margin-bottom: 0.55rem;
+        .md-content h1:first-child, .md-content h2:first-child, .md-content h3:first-child {
+            margin-top: 0;
         }
-        .md-content ol {
-            list-style-type: decimal;
-            padding-left: 1.35rem;
-            margin-bottom: 0.55rem;
+        .md-content h1 { font-size: 17px; }
+        .md-content h2 { font-size: 15.5px; }
+        .md-content h3 { font-size: 14.5px; }
+
+        .md-content ul, .md-content ol {
+            padding-left: 20px;
+            margin: 6px 0 10px;
         }
+
         .md-content li {
-            margin-bottom: 0.25rem;
-            line-height: 1.5;
+            margin-bottom: 4px;
         }
+
         .md-content blockquote {
-            border-left: 3px solid #3390ec;
-            padding-left: 0.75rem;
-            margin: 0.5rem 0;
-            opacity: 0.9;
+            border-left: 3px solid var(--accent);
+            padding-left: 10px;
+            margin: 8px 0;
+            color: var(--text-secondary);
             font-style: italic;
         }
+
         .md-content a {
-            color: #3390ec;
+            color: var(--accent);
             text-decoration: underline;
             word-break: break-all;
         }
-        .dark .md-content a {
-            color: #6ab3f3;
-        }
+
         .md-content code.inline-code {
             font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-            font-size: 0.85em;
-            padding: 0.12rem 0.35rem;
-            border-radius: 0.35rem;
-            background-color: rgba(51, 144, 236, 0.12);
-            color: #1d6ec2;
+            font-size: 0.86em;
+            padding: 2px 6px;
+            border-radius: 6px;
+            background-color: var(--inline-code-bg);
+            color: var(--inline-code-color);
         }
-        .dark .md-content code.inline-code {
-            background-color: rgba(106, 179, 243, 0.16);
-            color: #8cc8ff;
+
+        .code-block {
+            margin: 10px 0;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: #1e293b;
+            color: #e2e8f0;
+            border: 1px solid rgba(148, 163, 184, 0.2);
         }
-        .md-content pre {
+
+        .code-block-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 6px 12px;
+            background-color: #0f172a;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+            font-size: 11px;
+        }
+
+        .code-lang {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #38bdf8;
+            font-weight: 600;
+        }
+
+        .code-copy-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            border: none;
+            background: rgba(255, 255, 255, 0.08);
+            color: #cbd5e1;
+            font-size: 11px;
+            padding: 3px 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.15s, color 0.15s;
+        }
+
+        .code-copy-btn:hover {
+            background: rgba(255, 255, 255, 0.16);
+            color: #ffffff;
+        }
+
+        .code-block pre {
+            margin: 0;
+            padding: 12px;
             overflow-x: auto;
             font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-            font-size: 0.83rem;
+            font-size: 13px;
             line-height: 1.5;
+        }
+
+        /* ================= YOZMOQDA ANIMATSIYASI ================= */
+        @keyframes tgBounce {
+            0%, 80%, 100% {
+                transform: scale(0.55);
+                opacity: 0.4;
+            }
+            40% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .typing-dots {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .typing-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background-color: var(--accent);
+            animation: tgBounce 1.3s infinite ease-in-out both;
+        }
+
+        .typing-dot.sm {
+            width: 4px;
+            height: 4px;
+        }
+
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+        .typing-dot:nth-child(3) { animation-delay: 0s; }
+
+        /* ================= PASTKI KIRITISH PANELI ================= */
+        .input-bar {
+            background-color: var(--bg-input-bar);
+            border-top: 1px solid var(--border-color);
+            padding: 10px 16px;
+            flex-shrink: 0;
+        }
+
+        .input-inner {
+            max-width: 780px;
+            margin: 0 auto;
+            display: flex;
+            align-items: flex-end;
+            gap: 10px;
+        }
+
+        .textarea-wrap {
+            flex: 1;
+            background-color: var(--bg-input);
+            border: 1.5px solid transparent;
+            border-radius: 22px;
+            padding: 9px 16px;
+            display: flex;
+            align-items: center;
+            transition: border-color 0.16s;
+        }
+
+        .textarea-wrap:focus-within {
+            border-color: var(--accent);
+        }
+
+        .message-input {
+            width: 100%;
+            border: none;
+            background: transparent;
+            color: var(--text-primary);
+            font-size: 14.5px;
+            line-height: 1.45;
+            resize: none;
+            outline: none;
+            max-height: 140px;
+            overflow-y: auto;
+        }
+
+        .message-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .send-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: none;
+            background-color: #3390ec;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(51, 144, 236, 0.35);
+            transition: background-color 0.15s, transform 0.12s, opacity 0.15s;
+        }
+
+        .send-btn:hover:not(:disabled) {
+            background-color: #257ed6;
+        }
+
+        .send-btn:active:not(:disabled) {
+            transform: scale(0.94);
+        }
+
+        .send-btn:disabled {
+            opacity: 0.55;
+            cursor: not-allowed;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .spinner {
+            animation: spin 0.8s linear infinite;
+        }
+
+        .input-hint {
+            max-width: 780px;
+            margin: 6px auto 0;
+            text-align: center;
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        /* ================= MODALLAR VA TOAST ================= */
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(2px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            z-index: 100;
+        }
+
+        .modal-backdrop.open {
+            display: flex;
+        }
+
+        .modal-box {
+            width: 100%;
+            max-width: 400px;
+            background-color: var(--bg-modal);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            padding: 20px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .modal-title {
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .modal-desc {
+            font-size: 13.5px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin-bottom: 18px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 12.5px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--text-primary);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 10px;
+            border: 1.5px solid var(--border-color);
+            background-color: var(--bg-input);
+            color: var(--text-primary);
+            font-size: 13.5px;
+            outline: none;
+        }
+
+        .form-input:focus {
+            border-color: var(--accent);
+        }
+
+        .form-note {
+            font-size: 11.5px;
+            color: var(--text-secondary);
+            margin-top: 6px;
+            line-height: 1.45;
+        }
+
+        .modal-actions {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .btn {
+            padding: 9px 16px;
+            border-radius: 10px;
+            border: none;
+            font-size: 13.5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.15s, opacity 0.15s;
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--text-secondary);
+        }
+
+        .btn-ghost:hover {
+            background-color: var(--bg-hover);
+            color: var(--text-primary);
+        }
+
+        .btn-primary {
+            background-color: #3390ec;
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background-color: #257ed6;
+        }
+
+        .btn-danger {
+            background-color: #e53935;
+            color: #ffffff;
+        }
+
+        .btn-danger:hover {
+            background-color: #c62828;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 84px;
+            left: 50%;
+            transform: translateX(-50%) translateY(14px);
+            background-color: rgba(17, 24, 39, 0.92);
+            color: #ffffff;
+            padding: 9px 18px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 500;
+            box-shadow: var(--shadow-md);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s, transform 0.2s;
+            z-index: 120;
+            white-space: nowrap;
+        }
+
+        [data-theme="dark"] .toast {
+            background-color: rgba(241, 245, 249, 0.95);
+            color: #0f172a;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* ================= RESPONSIVE (MOBIL) ================= */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                border-right: none;
+            }
+
+            .app-shell.mobile-chat .sidebar {
+                display: none;
+            }
+
+            .app-shell.mobile-list .chat-main {
+                display: none;
+            }
+
+            .mobile-back-btn {
+                display: inline-flex;
+            }
+
+            .chat-delete-btn {
+                opacity: 0.75;
+            }
+
+            .messages-viewport {
+                padding: 12px 12px;
+            }
+
+            .bubble {
+                max-width: 88%;
+            }
+
+            .prompts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .input-hint {
+                display: none;
+            }
         }
     </style>
 </head>
-<body class="bg-white dark:bg-tg-darkBg text-slate-900 dark:text-slate-100 overflow-hidden select-none sm:select-auto">
-
-    <!-- Asosiy ilova konteyneri -->
-    <div id="app" class="h-[100dvh] w-full flex overflow-hidden relative">
+<body>
+    <div id="appShell" class="app-shell mobile-chat">
 
         <!-- ================= CHAP PANEL (SIDEBAR) ================= -->
-        <aside id="sidebar" class="w-full md:w-[340px] lg:w-[380px] flex-shrink-0 flex flex-col bg-white dark:bg-tg-darkSidebar border-r border-slate-200 dark:border-slate-800/80 z-20 transition-all duration-200">
-
-            <!-- Sidebar Sarlavha -->
-            <div class="px-4 py-3 flex items-center justify-between gap-2 border-b border-slate-100 dark:border-slate-800/70">
-                <div class="flex items-center gap-2.5">
-                    <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-[#229ED9] to-[#3390ec] flex items-center justify-center text-white shadow-sm">
-                        <!-- Telegram qog'oz samolyotcha ikonkasi -->
-                        <svg class="w-5 h-5 -ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="brand">
+                    <div class="brand-logo" aria-hidden="true">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M21.94 3.46a1.15 1.15 0 0 0-1.2-.16L2.88 10.67a1.15 1.15 0 0 0 .08 2.15l4.46 1.52 1.72 5.37a1.15 1.15 0 0 0 1.88.49l2.63-2.5 4.65 3.43a1.15 1.15 0 0 0 1.81-.68l3.01-15.65a1.15 1.15 0 0 0-.18-1.34zM9.7 14.43l7.68-6.48-5.94 7.7-.24 2.84-1.5-4.06z"/>
                         </svg>
                     </div>
-                    <div>
-                        <h1 class="font-bold text-base leading-tight tracking-tight">TeleAI</h1>
-                        <p class="text-[11px] text-slate-500 dark:text-slate-400">Universal Sun'iy Intellekt</p>
+                    <div class="brand-text">
+                        <h1>TeleAI</h1>
+                        <span>Sun'iy intellekt chat</span>
                     </div>
                 </div>
 
-                <!-- Yangi chat tugmasi -->
-                <button id="newChatBtn" title="Yangi chat boshlash" class="flex items-center gap-1.5 px-3 py-2 rounded-full bg-tg-blue hover:bg-tg-blueHover active:scale-95 text-white text-xs font-semibold shadow-sm transition cursor-pointer">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.3" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
+                <div class="sidebar-actions">
+                    <!-- Kun/Tun rejimi -->
+                    <button id="themeToggleBtn" class="icon-btn" type="button" title="Kun/Tun rejimi" aria-label="Kun/Tun rejimi">
+                        <svg id="themeIconSun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+                            <circle cx="12" cy="12" r="4"></circle>
+                            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+                        </svg>
+                        <svg id="themeIconMoon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                        </svg>
+                    </button>
+
+                    <!-- Sozlamalar (API kalit) -->
+                    <button id="settingsBtn" class="icon-btn" type="button" title="Sozlamalar" aria-label="Sozlamalar">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="3"></circle>
+                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Yangi chat tugmasi -->
+            <div class="new-chat-wrap">
+                <button id="newChatBtn" class="btn-new-chat" type="button">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+                        <path d="M12 5v14M5 12h14"></path>
                     </svg>
                     <span>Yangi chat</span>
                 </button>
             </div>
 
-            <!-- Qidiruv maydoni -->
-            <div class="px-3 py-2.5">
-                <div class="relative flex items-center">
-                    <svg class="w-4 h-4 text-slate-400 absolute left-3.5 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 105.65 5.65a7.5 7.5 0 0010.6 10.6z"/>
-                    </svg>
-                    <input id="searchInput" type="text" placeholder="Chatlarni qidirish..." class="w-full pl-10 pr-8 py-2 text-sm rounded-full bg-slate-100 dark:bg-[#242f3d] text-slate-800 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-tg-blue/60 transition">
-                    <button id="clearSearchBtn" class="hidden absolute right-2.5 p-1 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 cursor-pointer" title="Tozalash">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+            <!-- Qidiruv -->
+            <div class="search-wrap">
+                <div class="search-box">
+                    <span class="search-icon" aria-hidden="true">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="M21 21l-4.35-4.35"></path>
+                        </svg>
+                    </span>
+                    <input id="searchInput" class="search-input" type="text" placeholder="Qidirish...">
+                    <button id="searchClearBtn" class="search-clear" type="button" title="Tozalash" aria-label="Qidiruvni tozalash">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+                            <path d="M18 6L6 18M6 6l12 12"></path>
                         </svg>
                     </button>
                 </div>
             </div>
 
             <!-- Chatlar ro'yxati -->
-            <div id="chatList" class="flex-1 overflow-y-auto px-2 pb-3 space-y-1">
-                <!-- JS orqali dinamik to'ldiriladi -->
-            </div>
+            <div id="chatList" class="chat-list"></div>
 
-            <!-- Sidebar pastki ma'lumot -->
-            <div class="px-4 py-2.5 border-t border-slate-100 dark:border-slate-800/70 flex items-center justify-between text-[11px] text-slate-400 dark:text-slate-500">
-                <span>Gemini AI • O'zbek tili</span>
+            <!-- Pastki ma'lumot -->
+            <div class="sidebar-footer">
+                <span>TeleAI • Gemini</span>
                 <span id="chatCountBadge">1 ta chat</span>
             </div>
         </aside>
 
         <!-- ================= ASOSIY CHAT OYNASI ================= -->
-        <main id="chatArea" class="flex-1 flex flex-col min-w-0 h-full relative">
-
-            <!-- Chat Sarlavhasi (Header) -->
-            <header class="h-[60px] px-3 sm:px-4 bg-white dark:bg-tg-darkHeader border-b border-slate-200 dark:border-slate-800/80 flex items-center justify-between gap-2 z-10 flex-shrink-0">
-                <div class="flex items-center gap-2.5 min-w-0">
-                    <!-- Mobil orqaga qaytish tugmasi -->
-                    <button id="mobileBackBtn" class="md:hidden p-2 -ml-1 rounded-full hover:bg-slate-100 dark:hover:bg-tg-darkHover text-slate-600 dark:text-slate-300 transition cursor-pointer" title="Chatlar ro'yxati">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+        <main class="chat-main">
+            <header class="chat-header">
+                <div class="chat-header-left">
+                    <!-- Mobil orqaga qaytish -->
+                    <button id="mobileBackBtn" class="icon-btn mobile-back-btn" type="button" title="Orqaga" aria-label="Chatlar ro'yxati">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M15 18l-6-6 6-6"></path>
                         </svg>
                     </button>
 
                     <!-- AI Avatari -->
-                    <div id="headerAvatar" class="w-10 h-10 rounded-full bg-gradient-to-br from-sky-400 to-blue-600 flex items-center justify-center text-white font-bold text-sm flex-shrink-0 shadow-sm relative">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/>
+                    <div id="headerAvatar" class="header-avatar">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 3l1.9 5.8L20 10.7l-5.2 2.9L12 19.5l-2.8-5.9L4 10.7l6.1-1.9L12 3z"></path>
                         </svg>
-                        <span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2 ring-white dark:ring-tg-darkHeader"></span>
+                        <span class="online-dot"></span>
                     </div>
 
-                    <!-- Chat nomi va status -->
-                    <div class="min-w-0">
-                        <h2 id="headerTitle" class="font-semibold text-[15px] leading-tight truncate text-slate-900 dark:text-white">
-                            AI Yordamchi (Universal)
-                        </h2>
-                        <div id="headerStatus" class="text-xs text-tg-blue dark:text-sky-400 font-medium flex items-center gap-1 mt-0.5">
-                            <span>online</span>
-                        </div>
+                    <!-- Nomi va statusi -->
+                    <div class="header-info">
+                        <div id="headerTitle" class="header-title">TeleAI — Sun'iy intellekt</div>
+                        <div id="headerStatus" class="header-status">onlayn</div>
                     </div>
                 </div>
 
-                <!-- O'ng tomon boshqaruv tugmalari -->
-                <div class="flex items-center gap-1 sm:gap-1.5 flex-shrink-0">
-                    <!-- Internetdan qidirish (Google Search Grounding) tugmasi -->
-                    <button id="webSearchToggle" class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-xs font-medium border transition cursor-pointer" title="Internetdan dolzarb ma'lumot qidirishni yoqish/o'chirish">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9 9 0 100-18 9 9 0 000 18zM3.6 9h16.8M3.6 15h16.8M12 3a14.5 14.5 0 010 18M12 3a14.5 14.5 0 000 18"/>
-                        </svg>
-                        <span class="hidden sm:inline">Internet</span>
-                    </button>
-
-                    <!-- Kun / Tun rejimi tugmasi -->
-                    <button id="themeToggleBtn" class="p-2.5 rounded-full hover:bg-slate-100 dark:hover:bg-tg-darkHover text-slate-600 dark:text-slate-300 transition cursor-pointer" title="Kun/Tun rejimi">
-                        <!-- Quyosh (Dark rejimda ko'rinadi) -->
-                        <svg id="sunIcon" class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1.5M12 19.5V21M4.22 4.22l1.06 1.06M18.72 18.72l1.06 1.06M3 12h1.5M19.5 12H21M4.22 19.78l1.06-1.06M18.72 5.28l1.06-1.06M12 7.5a4.5 4.5 0 100 9 4.5 4.5 0 000-9z"/>
-                        </svg>
-                        <!-- Oy (Light rejimda ko'rinadi) -->
-                        <svg id="moonIcon" class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/>
-                        </svg>
-                    </button>
-
-                    <!-- Chatni tozalash tugmasi -->
-                    <button id="clearChatBtn" class="p-2.5 rounded-full hover:bg-red-50 dark:hover:bg-red-900/20 text-slate-500 hover:text-red-500 dark:text-slate-400 dark:hover:text-red-400 transition cursor-pointer" title="Chat tarixini tozalash">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                <div class="chat-header-right">
+                    <!-- Chatni tozalash -->
+                    <button id="clearChatBtn" class="icon-btn danger" type="button" title="Chatni tozalash" aria-label="Chatni tozalash">
+                        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="3 6 5 6 21 6"></polyline>
+                            <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path>
+                            <path d="M10 11v6M14 11v6M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"></path>
                         </svg>
                     </button>
                 </div>
             </header>
 
-            <!-- Xabarlar maydoni (Telegram naqshli foni) -->
-            <div id="messagesContainer" class="flex-1 overflow-y-auto tg-chat-bg px-3 sm:px-6 py-4 scroll-smooth">
-                <div id="messagesInner" class="max-w-3xl mx-auto flex flex-col gap-2.5 min-h-full">
-                    <!-- JS orqali xabarlar yoki boshlang'ich takliflar chiqariladi -->
-                </div>
+            <!-- Xabarlar maydoni -->
+            <div id="messagesViewport" class="messages-viewport">
+                <div id="messagesInner" class="messages-inner"></div>
             </div>
 
-            <!-- Pastki xabar yozish paneli -->
-            <footer class="bg-white dark:bg-tg-darkHeader border-t border-slate-200 dark:border-slate-800/80 px-3 sm:px-5 py-2.5 flex-shrink-0">
-                <div class="max-w-3xl mx-auto flex items-end gap-2 sm:gap-3">
-                    <!-- Matn kiritish qutisi -->
-                    <div class="flex-1 bg-slate-100 dark:bg-[#242f3d] rounded-3xl px-4 py-2 flex items-center border border-transparent focus-within:border-tg-blue/50 transition">
+            <!-- Xabar yozish paneli -->
+            <footer class="input-bar">
+                <div class="input-inner">
+                    <div class="textarea-wrap">
                         <textarea
                             id="messageInput"
+                            class="message-input"
                             rows="1"
-                            placeholder="Xabar yozing... (Istalgan savolingizni bering)"
-                            class="w-full bg-transparent text-sm sm:text-[15px] text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-400 resize-none focus:outline-none max-h-36 leading-relaxed py-0.5"
+                            placeholder="Xabar yozing..."
                         ></textarea>
                     </div>
-
-                    <!-- Telegram uslubidagi Send tugmasi -->
-                    <button
-                        id="sendBtn"
-                        class="w-11 h-11 rounded-full bg-tg-blue hover:bg-tg-blueHover active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed text-white flex items-center justify-center flex-shrink-0 shadow-md transition cursor-pointer"
-                        title="Yuborish (Enter)"
-                    >
-                        <svg id="sendIcon" class="w-5 h-5 translate-x-[1px]" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                    <button id="sendBtn" class="send-btn" type="button" title="Yuborish (Enter)" aria-label="Yuborish">
+                        <svg id="sendIcon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="transform: translateX(1px);">
+                            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
                         </svg>
-                        <svg id="sendSpinner" class="w-5 h-5 animate-spin hidden" fill="none" viewBox="0 0 24 24">
-                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3"></circle>
-                            <path class="opacity-90" fill="currentColor" d="M4 12a8 8 0 018-8v3a5 5 0 00-5 5H4z"></path>
+                        <svg id="sendSpinner" class="spinner" width="20" height="20" viewBox="0 0 24 24" fill="none" style="display:none;">
+                            <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="3" opacity="0.3"></circle>
+                            <path d="M21 12a9 9 0 0 0-9-9" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path>
                         </svg>
                     </button>
                 </div>
-                <p class="max-w-3xl mx-auto text-[11px] text-center text-slate-400 dark:text-slate-500 mt-1.5 hidden sm:block">
-                    Yuborish uchun <kbd class="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-mono text-[10px]">Enter</kbd>, yangi qator uchun <kbd class="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-mono text-[10px]">Shift + Enter</kbd> bosing.
-                </p>
+                <div class="input-hint">
+                    Yuborish: <strong>Enter</strong> &nbsp;•&nbsp; Yangi qator: <strong>Shift + Enter</strong>
+                </div>
             </footer>
         </main>
     </div>
 
-    <!-- ================= TASDIQLASH MODALI (confirm() o'rniga) ================= -->
-    <div id="confirmModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 backdrop-blur-[2px] p-4">
-        <div class="bg-white dark:bg-tg-darkSidebar w-full max-w-sm rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700/70 p-5 transform transition-all">
-            <h3 id="modalTitle" class="text-base font-bold text-slate-900 dark:text-white mb-2">Tasdiqlash</h3>
-            <p id="modalDesc" class="text-sm text-slate-600 dark:text-slate-300 mb-5 leading-relaxed">Ushbu amalni bajarishni xohlaysizmi?</p>
-            <div class="flex items-center justify-end gap-2">
-                <button id="modalCancelBtn" class="px-4 py-2 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-tg-darkHover transition cursor-pointer">
-                    Bekor qilish
-                </button>
-                <button id="modalConfirmBtn" class="px-4 py-2 rounded-xl text-sm font-semibold bg-red-500 hover:bg-red-600 text-white shadow-sm transition cursor-pointer">
-                    Tasdiqlash
-                </button>
+    <!-- ================= SOZLAMALAR MODALI ================= -->
+    <div id="settingsModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
+        <div class="modal-box">
+            <h3 id="settingsTitle" class="modal-title">Sozlamalar</h3>
+            <p class="modal-desc">
+                Preview (ko'rib chiqish) muhitida ilova API kalitsiz ham avtomatik ishlaydi. Agar faylni kompyuteringizga yuklab olib ishlatayotgan bo'lsangiz, o'z Gemini API kalitingizni shu yerga kiriting.
+            </p>
+            <div class="form-group">
+                <label for="apiKeyInput" class="form-label">Gemini API kaliti (ixtiyoriy)</label>
+                <input id="apiKeyInput" class="form-input" type="password" placeholder="AIzaSy... (Preview uchun bo'sh qoldiring)" autocomplete="off">
+                <p class="form-note">
+                    Kalit faqat sizning brauzeringizdagi <code>LocalStorage</code> xotirasida saqlanadi va boshqa joyga yuborilmaydi.
+                </p>
+            </div>
+            <div class="modal-actions">
+                <button id="clearApiKeyBtn" class="btn btn-ghost" type="button">Kalitni o'chirish</button>
+                <button id="closeSettingsBtn" class="btn btn-ghost" type="button">Bekor qilish</button>
+                <button id="saveSettingsBtn" class="btn btn-primary" type="button">Saqlash</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= TASDIQLASH MODALI ================= -->
+    <div id="confirmModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
+        <div class="modal-box">
+            <h3 id="confirmTitle" class="modal-title">Tasdiqlash</h3>
+            <p id="confirmDesc" class="modal-desc">Ushbu amalni bajarishni tasdiqlaysizmi?</p>
+            <div class="modal-actions">
+                <button id="confirmCancelBtn" class="btn btn-ghost" type="button">Bekor qilish</button>
+                <button id="confirmOkBtn" class="btn btn-danger" type="button">Tasdiqlash</button>
             </div>
         </div>
     </div>
 
     <!-- ================= TOAST XABARNOMA ================= -->
-    <div id="toast" class="fixed bottom-20 left-1/2 -translate-x-1/2 z-50 px-4 py-2.5 rounded-full bg-slate-900/90 dark:bg-slate-100/95 text-white dark:text-slate-900 text-xs sm:text-sm font-medium shadow-lg pointer-events-none opacity-0 translate-y-3 transition-all duration-200 flex items-center gap-2">
-        <span id="toastText">Nusxalandi!</span>
-    </div>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-    <!-- ================= JAVASCRIPT MANTIQI ================= -->
     <script>
-        /**
-         * TeleAI — Telegram Web uslubidagi AI Chat ilovasi
-         * Gemini 3 Flash Preview API bilan ishlaydi.
-         */
+        (function () {
+            "use strict";
 
-        // --- KONSTANTALAR VA SOZLAMALAR ---
-        const apiKey = ""; // Runtime muhiti avtomatik kalitni taqdim etadi
-        const GEMINI_MODEL = "gemini-3-flash-preview";
-        const STORAGE_KEYS = {
-            CHATS: "teleai_chats_v1",
-            ACTIVE_ID: "teleai_active_chat_id_v1",
-            THEME: "teleai_theme_v1",
-            WEB_SEARCH: "teleai_web_search_v1"
-        };
-
-        // AI tizim ko'rsatmasi (System Instruction)
-        const SYSTEM_INSTRUCTION = `Sen TeleAI — Telegram uslubidagi universal, bilimli, tezkor va amaliy sun'iy intellekt yordamchisan.
-Sening vazifang:
-1. Foydalanuvchining har qanday sohadagi (ilm-fan, dasturlash, matematika, tarix, biznes, kundalik hayot, tarjima, ta'lim, sog'lom turmush, texnologiya va boshqalar) savollariga aniq, amaliy, tushunarli va foydali javob berish.
-2. Foydalanuvchi qaysi tilda yozsa (asosan O'zbek tilida), aynan shu tilda ravon, tabiiy va savodli javob qaytarish.
-3. Javoblarni o'qishga qulay bo'lishi uchun Markdown formatlashdan (qalin matn, ro'yxatlar, kerak bo'lganda kod bloklari) o'rinli foydalanish.
-4. Dasturlash savollarida to'liq va tushunarli kod namunalari berish.
-5. Muloyim, samimiy va do'stona muloqot qilish.`;
-
-        // Yangi chat uchun tezkor amaliy savol namunalari
-        const QUICK_PROMPTS = [
-            {
-                icon: "🐍",
-                title: "Python o'rganish",
-                text: "Python dasturlash tilini qanday o'rganaman?"
-            },
-            {
-                icon: "☀️",
-                title: "Kun tartibi",
-                text: "Sog'lom kun tartibi tuzib ber"
-            },
-            {
-                icon: "⚛️",
-                title: "Kvant fizikasi",
-                text: "Kvant fizikasini oddiy tilda tushuntir"
-            },
-            {
-                icon: "✉️",
-                title: "Rasmiy xat",
-                text: "Ingliz tilida rasmiy xat yozib ber"
-            }
-        ];
-
-        // Yangi chatlar uchun chiroyli gradient ranglar
-        const AVATAR_GRADIENTS = [
-            "from-sky-400 to-blue-600",
-            "from-emerald-400 to-teal-600",
-            "from-violet-400 to-purple-600",
-            "from-amber-400 to-orange-500",
-            "from-rose-400 to-pink-600",
-            "from-cyan-400 to-indigo-600"
-        ];
-
-        // --- ILOVA HOLATI (STATE) ---
-        let state = {
-            chats: [],
-            activeChatId: null,
-            theme: "light",
-            webSearch: true,
-            searchQuery: "",
-            isGenerating: false,
-            mobileView: "chat", // 'chat' yoki 'list'
-            pendingModalAction: null
-        };
-
-        // --- DOM ELEMENTLARI ---
-        const els = {
-            sidebar: document.getElementById("sidebar"),
-            chatArea: document.getElementById("chatArea"),
-            chatList: document.getElementById("chatList"),
-            chatCountBadge: document.getElementById("chatCountBadge"),
-            searchInput: document.getElementById("searchInput"),
-            clearSearchBtn: document.getElementById("clearSearchBtn"),
-            newChatBtn: document.getElementById("newChatBtn"),
-            mobileBackBtn: document.getElementById("mobileBackBtn"),
-            headerAvatar: document.getElementById("headerAvatar"),
-            headerTitle: document.getElementById("headerTitle"),
-            headerStatus: document.getElementById("headerStatus"),
-            webSearchToggle: document.getElementById("webSearchToggle"),
-            themeToggleBtn: document.getElementById("themeToggleBtn"),
-            clearChatBtn: document.getElementById("clearChatBtn"),
-            messagesContainer: document.getElementById("messagesContainer"),
-            messagesInner: document.getElementById("messagesInner"),
-            messageInput: document.getElementById("messageInput"),
-            sendBtn: document.getElementById("sendBtn"),
-            sendIcon: document.getElementById("sendIcon"),
-            sendSpinner: document.getElementById("sendSpinner"),
-            confirmModal: document.getElementById("confirmModal"),
-            modalTitle: document.getElementById("modalTitle"),
-            modalDesc: document.getElementById("modalDesc"),
-            modalCancelBtn: document.getElementById("modalCancelBtn"),
-            modalConfirmBtn: document.getElementById("modalConfirmBtn"),
-            toast: document.getElementById("toast"),
-            toastText: document.getElementById("toastText")
-        };
-
-        // --- YORDAMCHI FUNKSIYALAR ---
-        function generateId() {
-            return "chat_" + Date.now() + "_" + Math.random().toString(36).slice(2, 8);
-        }
-
-        function formatTime(isoString) {
-            try {
-                const date = new Date(isoString);
-                return date.toLocaleTimeString("uz-UZ", { hour: "2-digit", minute: "2-digit", hour12: false });
-            } catch {
-                return "";
-            }
-        }
-
-        function formatChatListTime(isoString) {
-            try {
-                const date = new Date(isoString);
-                const now = new Date();
-                const isToday = date.toDateString() === now.toDateString();
-                if (isToday) {
-                    return date.toLocaleTimeString("uz-UZ", { hour: "2-digit", minute: "2-digit", hour12: false });
-                }
-                return date.toLocaleDateString("uz-UZ", { day: "2-digit", month: "2-digit" });
-            } catch {
-                return "";
-            }
-        }
-
-        function escapeHtml(str) {
-            return String(str)
-                .replace(/&/g, "&amp;")
-                .replace(/</g, "&lt;")
-                .replace(/>/g, "&gt;")
-                .replace(/"/g, "&quot;")
-                .replace(/'/g, "&#039;");
-        }
-
-        // Toast ko'rsatish
-        let toastTimer = null;
-        function showToast(message) {
-            els.toastText.textContent = message;
-            els.toast.classList.remove("opacity-0", "translate-y-3");
-            els.toast.classList.add("opacity-100", "translate-y-0");
-            clearTimeout(toastTimer);
-            toastTimer = setTimeout(() => {
-                els.toast.classList.add("opacity-0", "translate-y-3");
-                els.toast.classList.remove("opacity-100", "translate-y-0");
-            }, 2200);
-        }
-
-        // Matnni buferga nusxalash (iFrame-xavfsiz execCommand usuli)
-        function copyToClipboard(text, successMsg = "Matn nusxalandi!") {
-            try {
-                const textarea = document.createElement("textarea");
-                textarea.value = text;
-                textarea.style.position = "fixed";
-                textarea.style.left = "-9999px";
-                textarea.style.top = "0";
-                document.body.appendChild(textarea);
-                textarea.focus();
-                textarea.select();
-                const copied = document.execCommand("copy");
-                document.body.removeChild(textarea);
-                if (copied) {
-                    showToast(successMsg);
-                } else {
-                    showToast("Nusxalab bo'lmadi");
-                }
-            } catch (err) {
-                showToast("Nusxalashda xatolik yuz berdi");
-            }
-        }
-
-        // Tasdiqlash modalini ochish
-        function openConfirmModal(title, desc, confirmBtnText, onConfirm) {
-            els.modalTitle.textContent = title;
-            els.modalDesc.textContent = desc;
-            els.modalConfirmBtn.textContent = confirmBtnText;
-            state.pendingModalAction = onConfirm;
-            els.confirmModal.classList.remove("hidden");
-            els.confirmModal.classList.add("flex");
-        }
-
-        function closeConfirmModal() {
-            els.confirmModal.classList.add("hidden");
-            els.confirmModal.classList.remove("flex");
-            state.pendingModalAction = null;
-        }
-
-        // --- MARKDOWN PARSER (XAVFSIZ VA KOD BLOKLARI BILAN) ---
-        function renderMarkdown(rawText) {
-            if (!rawText) return "";
-
-            // 1. Kod bloklarini (```lang ... ```) vaqtincha ajratib olish
-            const codeBlocks = [];
-            let text = rawText.replace(/```(\w*)\n?([\s\S]*?)```/g, (_, lang, code) => {
-                const idx = codeBlocks.length;
-                const cleanLang = (lang || "kod").trim();
-                const cleanCode = code.replace(/\n$/, "");
-                codeBlocks.push({ lang: cleanLang, code: cleanCode });
-                return `%%CODEBLOCK_${idx}%%`;
-            });
-
-            // 2. HTML belgilarni xavfsizlantirish
-            text = escapeHtml(text);
-
-            // 3. Inline kod (`...`)
-            const inlineCodes = [];
-            text = text.replace(/`([^`\n]+)`/g, (_, code) => {
-                const idx = inlineCodes.length;
-                inlineCodes.push(code);
-                return `%%INLINECODE_${idx}%%`;
-            });
-
-            // 4. Qatorlar bo'yicha sarlavha, ro'yxat va iqtiboslarni qayta ishlash
-            const lines = text.split("\n");
-            let htmlLines = [];
-            let inUl = false;
-            let inOl = false;
-
-            const closeLists = () => {
-                if (inUl) { htmlLines.push("</ul>"); inUl = false; }
-                if (inOl) { htmlLines.push("</ol>"); inOl = false; }
+            // ================= KONSTANTALAR =================
+            const GEMINI_MODEL = "gemini-3-flash-preview";
+            const STORAGE_KEYS = {
+                CHATS: "teleai_v2_chats",
+                ACTIVE_ID: "teleai_v2_active_id",
+                THEME: "teleai_v2_theme",
+                API_KEY: "teleai_v2_custom_api_key"
             };
 
-            for (let i = 0; i < lines.length; i++) {
-                let line = lines[i];
+            const SYSTEM_INSTRUCTION = [
+                "Sen TeleAI — Telegram uslubidagi universal, bilimli, tezkor va amaliy sun'iy intellekt yordamchisan.",
+                "Qoidalar:",
+                "1. Dasturlash, fan, matematika, biznes, tarjima, ta'lim, tarix va kundalik hayotga oid barcha savollarga aniq, amaliy va foydali javob ber.",
+                "2. Foydalanuvchi qaysi tilda yozsa (asosan O'zbek tilida), aynan shu tilda ravon, tabiiy va savodli javob qaytar.",
+                "3. Javoblarni tushunarli bo'lishi uchun Markdown formatlashdan (sarlavhalar, qalin matn, ro'yxatlar, kod bloklari) o'rinli foydalan.",
+                "4. Dasturlash savollarida toza, tushunarli va ishlaydigan kod namunalarini taqdim et.",
+                "5. Samimiy, hurmatli va lo'nda muloqot qil."
+            ].join("\n");
 
-                // Kod bloki joyi
-                if (/^%%CODEBLOCK_\d+%%$/.test(line.trim())) {
-                    closeLists();
-                    htmlLines.push(line.trim());
-                    continue;
+            const QUICK_PROMPTS = [
+                {
+                    emoji: "💻",
+                    title: "Dasturlash",
+                    text: "JavaScript'da massivdan takroriy elementlarni olib tashlashning eng yaxshi usullarini kod bilan ko'rsat."
+                },
+                {
+                    emoji: "🚀",
+                    title: "Biznes g'oya",
+                    text: "O'zbekistonda kichik byudjet bilan boshlash mumkin bo'lgan 5 ta amaliy onlayn biznes g'oya ber."
+                },
+                {
+                    emoji: "🌐",
+                    title: "Tarjima",
+                    text: "Ingliz tilida ishga topshirish uchun qisqa va professional rasmiy xat (Cover Letter) yozib ber."
+                },
+                {
+                    emoji: "🧠",
+                    title: "Tushuntirish",
+                    text: "Sun'iy intellekt va neyron tarmoqlar qanday ishlashini oddiy hayotiy misollar bilan tushuntir."
                 }
+            ];
 
-                // Sarlavhalar (#, ##, ###)
-                if (/^###\s+(.+)$/.test(line)) {
-                    closeLists();
-                    htmlLines.push(`<h3>${formatInline(line.replace(/^###\s+/, ""))}</h3>`);
-                    continue;
-                }
-                if (/^##\s+(.+)$/.test(line)) {
-                    closeLists();
-                    htmlLines.push(`<h2>${formatInline(line.replace(/^##\s+/, ""))}</h2>`);
-                    continue;
-                }
-                if (/^#\s+(.+)$/.test(line)) {
-                    closeLists();
-                    htmlLines.push(`<h1>${formatInline(line.replace(/^#\s+/, ""))}</h1>`);
-                    continue;
-                }
+            const AVATAR_GRADIENTS = [
+                "linear-gradient(135deg, #38bdf8, #2563eb)",
+                "linear-gradient(135deg, #34d399, #0d9488)",
+                "linear-gradient(135deg, #a78bfa, #7c3aed)",
+                "linear-gradient(135deg, #fbbf24, #ea580c)",
+                "linear-gradient(135deg, #fb7185, #db2777)",
+                "linear-gradient(135deg, #22d3ee, #4f46e5)"
+            ];
 
-                // Iqtibos (>)
-                if (/^&gt;\s?(.+)$/.test(line)) {
-                    closeLists();
-                    htmlLines.push(`<blockquote>${formatInline(line.replace(/^&gt;\s?/, ""))}</blockquote>`);
-                    continue;
-                }
+            // ================= HOLAT (STATE) =================
+            const state = {
+                chats: [],
+                activeChatId: null,
+                theme: "light",
+                customApiKey: "",
+                searchQuery: "",
+                isGenerating: false,
+                mobileView: "chat", // "chat" | "list"
+                pendingConfirm: null
+            };
 
-                // Belgili ro'yxat (- yoki *)
-                if (/^\s*[-*•]\s+(.+)$/.test(line)) {
-                    if (inOl) { htmlLines.push("</ol>"); inOl = false; }
-                    if (!inUl) { htmlLines.push("<ul>"); inUl = true; }
-                    htmlLines.push(`<li>${formatInline(line.replace(/^\s*[-*•]\s+/, ""))}</li>`);
-                    continue;
-                }
+            // ================= DOM ELEMENTLARI =================
+            const els = {
+                appShell: document.getElementById("appShell"),
+                themeToggleBtn: document.getElementById("themeToggleBtn"),
+                themeIconSun: document.getElementById("themeIconSun"),
+                themeIconMoon: document.getElementById("themeIconMoon"),
+                settingsBtn: document.getElementById("settingsBtn"),
+                newChatBtn: document.getElementById("newChatBtn"),
+                searchInput: document.getElementById("searchInput"),
+                searchClearBtn: document.getElementById("searchClearBtn"),
+                chatList: document.getElementById("chatList"),
+                chatCountBadge: document.getElementById("chatCountBadge"),
+                mobileBackBtn: document.getElementById("mobileBackBtn"),
+                headerAvatar: document.getElementById("headerAvatar"),
+                headerTitle: document.getElementById("headerTitle"),
+                headerStatus: document.getElementById("headerStatus"),
+                clearChatBtn: document.getElementById("clearChatBtn"),
+                messagesViewport: document.getElementById("messagesViewport"),
+                messagesInner: document.getElementById("messagesInner"),
+                messageInput: document.getElementById("messageInput"),
+                sendBtn: document.getElementById("sendBtn"),
+                sendIcon: document.getElementById("sendIcon"),
+                sendSpinner: document.getElementById("sendSpinner"),
+                settingsModal: document.getElementById("settingsModal"),
+                apiKeyInput: document.getElementById("apiKeyInput"),
+                clearApiKeyBtn: document.getElementById("clearApiKeyBtn"),
+                closeSettingsBtn: document.getElementById("closeSettingsBtn"),
+                saveSettingsBtn: document.getElementById("saveSettingsBtn"),
+                confirmModal: document.getElementById("confirmModal"),
+                confirmTitle: document.getElementById("confirmTitle"),
+                confirmDesc: document.getElementById("confirmDesc"),
+                confirmCancelBtn: document.getElementById("confirmCancelBtn"),
+                confirmOkBtn: document.getElementById("confirmOkBtn"),
+                toast: document.getElementById("toast")
+            };
 
-                // Raqamli ro'yxat (1. 2.)
-                if (/^\s*\d+\.\s+(.+)$/.test(line)) {
-                    if (inUl) { htmlLines.push("</ul>"); inUl = false; }
-                    if (!inOl) { htmlLines.push("<ol>"); inOl = true; }
-                    htmlLines.push(`<li>${formatInline(line.replace(/^\s*\d+\.\s+/, ""))}</li>`);
-                    continue;
-                }
-
-                // Bo'sh qator
-                if (line.trim() === "") {
-                    closeLists();
-                    continue;
-                }
-
-                // Oddiy paragraf
-                closeLists();
-                htmlLines.push(`<p>${formatInline(line)}</p>`);
+            // ================= YORDAMCHI FUNKSIYALAR =================
+            function createId(prefix) {
+                return prefix + "_" + Date.now() + "_" + Math.random().toString(36).slice(2, 8);
             }
-            closeLists();
 
-            let result = htmlLines.join("");
-
-            // 5. Inline kodlarni qayta joylash
-            result = result.replace(/%%INLINECODE_(\d+)%%/g, (_, idx) => {
-                return `<code class="inline-code">${inlineCodes[idx]}</code>`;
-            });
-
-            // 6. Kod bloklarini chiroyli nusxalash tugmasi bilan qayta joylash
-            result = result.replace(/%%CODEBLOCK_(\d+)%%/g, (_, idx) => {
-                const block = codeBlocks[idx];
-                const encodedForCopy = encodeURIComponent(block.code);
-                return `
-                    <div class="my-2.5 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700/80 bg-[#1e293b] text-slate-100 shadow-sm">
-                        <div class="flex items-center justify-between px-3 py-1.5 bg-[#0f172a] text-xs text-slate-300 border-b border-slate-700/60">
-                            <span class="font-mono uppercase tracking-wider text-[11px] text-sky-400">${escapeHtml(block.lang)}</span>
-                            <button
-                                type="button"
-                                onclick="copyCodeBlock(this, '${encodedForCopy}')"
-                                class="flex items-center gap-1 px-2 py-0.5 rounded-md hover:bg-slate-700/80 text-slate-300 hover:text-white transition cursor-pointer text-[11px]"
-                            >
-                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
-                                </svg>
-                                <span>Nusxalash</span>
-                            </button>
-                        </div>
-                        <pre class="p-3 m-0 overflow-x-auto"><code>${escapeHtml(block.code)}</code></pre>
-                    </div>
-                `;
-            });
-
-            return result;
-        }
-
-        function formatInline(text) {
-            // Havolalar [matn](url)
-            text = text.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
-            // Qalin matn **...**
-            text = text.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
-            // Kursiv *...*
-            text = text.replace(/(?<!\*)\*([^*]+)\*(?!\*)/g, "<em>$1</em>");
-            // Chizilgan ~~...~~
-            text = text.replace(/~~([^~]+)~~/g, "<del>$1</del>");
-            return text;
-        }
-
-        // Global kod nusxalash funksiyasi
-        window.copyCodeBlock = function(btnEl, encodedCode) {
-            const decoded = decodeURIComponent(encodedCode);
-            copyToClipboard(decoded, "Kod nusxalandi!");
-            const label = btnEl.querySelector("span");
-            if (label) {
-                const oldText = label.textContent;
-                label.textContent = "Nusxalandi ✓";
-                setTimeout(() => { label.textContent = oldText; }, 1600);
+            function escapeHtml(str) {
+                return String(str)
+                    .replace(/&/g, "&amp;")
+                    .replace(/</g, "&lt;")
+                    .replace(/>/g, "&gt;")
+                    .replace(/"/g, "&quot;")
+                    .replace(/'/g, "&#39;");
             }
-        };
 
-        // --- LOCALSTORAGE BILAN ISHLASH ---
-        function saveState() {
-            try {
-                localStorage.setItem(STORAGE_KEYS.CHATS, JSON.stringify(state.chats));
-                localStorage.setItem(STORAGE_KEYS.ACTIVE_ID, state.activeChatId || "");
-                localStorage.setItem(STORAGE_KEYS.THEME, state.theme);
-                localStorage.setItem(STORAGE_KEYS.WEB_SEARCH, JSON.stringify(state.webSearch));
-            } catch (e) {
-                // Storage to'lgan bo'lsa jimgina o'tkazib yuborish
+            function formatTime(iso) {
+                try {
+                    const d = new Date(iso);
+                    const h = String(d.getHours()).padStart(2, "0");
+                    const m = String(d.getMinutes()).padStart(2, "0");
+                    return h + ":" + m;
+                } catch (e) {
+                    return "";
+                }
             }
-        }
 
-        function loadState() {
-            try {
-                const savedTheme = localStorage.getItem(STORAGE_KEYS.THEME);
-                if (savedTheme === "dark" || savedTheme === "light") {
-                    state.theme = savedTheme;
-                } else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
-                    state.theme = "dark";
-                }
-
-                const savedSearch = localStorage.getItem(STORAGE_KEYS.WEB_SEARCH);
-                if (savedSearch !== null) {
-                    state.webSearch = JSON.parse(savedSearch);
-                }
-
-                const savedChats = localStorage.getItem(STORAGE_KEYS.CHATS);
-                if (savedChats) {
-                    const parsed = JSON.parse(savedChats);
-                    if (Array.isArray(parsed) && parsed.length > 0) {
-                        state.chats = parsed;
+            function formatChatTime(iso) {
+                try {
+                    const d = new Date(iso);
+                    const now = new Date();
+                    if (d.toDateString() === now.toDateString()) {
+                        return formatTime(iso);
                     }
-                }
-
-                const savedActiveId = localStorage.getItem(STORAGE_KEYS.ACTIVE_ID);
-                if (savedActiveId && state.chats.some(c => c.id === savedActiveId)) {
-                    state.activeChatId = savedActiveId;
-                }
-            } catch (e) {
-                state.chats = [];
-            }
-
-            // Agar chatlar bo'sh bo'lsa, standart "AI Yordamchi (Universal)" chatini yaratish
-            if (state.chats.length === 0) {
-                const defaultChat = createChatObject("AI Yordamchi (Universal)", AVATAR_GRADIENTS[0]);
-                state.chats.push(defaultChat);
-                state.activeChatId = defaultChat.id;
-                saveState();
-            } else if (!state.activeChatId) {
-                state.activeChatId = state.chats[0].id;
-            }
-        }
-
-        function createChatObject(title = "Yangi suhbat", gradient = null) {
-            const now = new Date().toISOString();
-            const color = gradient || AVATAR_GRADIENTS[state.chats.length % AVATAR_GRADIENTS.length];
-            return {
-                id: generateId(),
-                title,
-                gradient: color,
-                createdAt: now,
-                updatedAt: now,
-                messages: []
-            };
-        }
-
-        function getActiveChat() {
-            return state.chats.find(c => c.id === state.activeChatId) || state.chats[0];
-        }
-
-        // --- MAVZU (LIGHT / DARK) VA WEB SEARCH UI ---
-        function applyTheme() {
-            const root = document.documentElement;
-            if (state.theme === "dark") {
-                root.classList.add("dark");
-                root.classList.remove("light");
-            } else {
-                root.classList.remove("dark");
-                root.classList.add("light");
-            }
-        }
-
-        function updateWebSearchUI() {
-            if (state.webSearch) {
-                els.webSearchToggle.className = "flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-xs font-medium border border-tg-blue/30 bg-tg-blue/10 text-tg-blue dark:text-sky-400 transition cursor-pointer";
-                els.webSearchToggle.title = "Internetdan qidirish: YOQIQ (Dolzarb ma'lumotlar uchun)";
-            } else {
-                els.webSearchToggle.className = "flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-xs font-medium border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-tg-darkHover transition cursor-pointer";
-                els.webSearchToggle.title = "Internetdan qidirish: O'CHIQ";
-            }
-        }
-
-        // --- RESPONSIVE MOBIL KO'RINISH ---
-        function updateResponsiveLayout() {
-            const isMobile = window.innerWidth < 768;
-            if (!isMobile) {
-                els.sidebar.classList.remove("hidden");
-                els.chatArea.classList.remove("hidden");
-            } else {
-                if (state.mobileView === "list") {
-                    els.sidebar.classList.remove("hidden");
-                    els.chatArea.classList.add("hidden");
-                } else {
-                    els.sidebar.classList.add("hidden");
-                    els.chatArea.classList.remove("hidden");
+                    const day = String(d.getDate()).padStart(2, "0");
+                    const mon = String(d.getMonth() + 1).padStart(2, "0");
+                    return day + "." + mon;
+                } catch (e) {
+                    return "";
                 }
             }
-        }
 
-        // --- SIDEBAR CHATLAR RO'YXATINI CHIZISH ---
-        function renderChatList() {
-            const query = state.searchQuery.trim().toLowerCase();
-            // Oxirgi yangilangan chatlar yuqorida tursin
-            const sortedChats = [...state.chats].sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
-            const filtered = sortedChats.filter(chat => {
-                if (!query) return true;
-                const inTitle = chat.title.toLowerCase().includes(query);
-                const inMsgs = chat.messages.some(m => m.text.toLowerCase().includes(query));
-                return inTitle || inMsgs;
-            });
-
-            els.chatCountBadge.textContent = `${state.chats.length} ta chat`;
-            els.chatList.innerHTML = "";
-
-            if (filtered.length === 0) {
-                els.chatList.innerHTML = `
-                    <div class="py-10 px-4 text-center text-sm text-slate-400 dark:text-slate-500">
-                        <p class="mb-1 font-medium">Hech qanday chat topilmadi</p>
-                        <p class="text-xs">Boshqa so'z bilan qidirib ko'ring</p>
-                    </div>
-                `;
-                return;
+            let toastTimer = null;
+            function showToast(text) {
+                els.toast.textContent = text;
+                els.toast.classList.add("show");
+                clearTimeout(toastTimer);
+                toastTimer = setTimeout(function () {
+                    els.toast.classList.remove("show");
+                }, 2300);
             }
 
-            filtered.forEach(chat => {
-                const isActive = chat.id === state.activeChatId;
-                const lastMsg = chat.messages[chat.messages.length - 1];
-                const previewText = lastMsg
-                    ? (lastMsg.role === "user" ? "Siz: " : "AI: ") + lastMsg.text.replace(/\s+/g, " ")
-                    : "Suhbatni boshlash uchun yozing...";
-                const timeStr = formatChatListTime(chat.updatedAt);
+            // iFrame-xavfsiz nusxalash (execCommand)
+            function copyText(text, successMsg) {
+                try {
+                    const ta = document.createElement("textarea");
+                    ta.value = text;
+                    ta.setAttribute("readonly", "");
+                    ta.style.position = "fixed";
+                    ta.style.left = "-9999px";
+                    ta.style.top = "0";
+                    document.body.appendChild(ta);
+                    ta.select();
+                    ta.setSelectionRange(0, ta.value.length);
+                    const ok = document.execCommand("copy");
+                    document.body.removeChild(ta);
+                    showToast(ok ? (successMsg || "Nusxalandi!") : "Nusxalab bo'lmadi");
+                } catch (e) {
+                    showToast("Nusxalashda xatolik yuz berdi");
+                }
+            }
 
-                const item = document.createElement("div");
-                item.className = `group relative flex items-center gap-3 px-3 py-2.5 rounded-xl cursor-pointer transition ${
-                    isActive
-                        ? "bg-tg-blue text-white shadow-sm"
-                        : "hover:bg-slate-100 dark:hover:bg-tg-darkHover text-slate-800 dark:text-slate-100"
-                }`;
+            // ================= XAVFSIZ VA BARQAROR MARKDOWN PARSER =================
+            function formatInlineMarkdown(escapedText) {
+                let s = escapedText;
+                // Havolalar [matn](https://...)
+                s = s.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+                // Qalin matn **...**
+                s = s.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+                // Kursiv *...* (lookbehind ishlatmasdan barcha brauzerlarga mos)
+                s = s.replace(/(^|[^*])\*([^*\n]+)\*(?!\*)/g, "$1<em>$2</em>");
+                // Chizilgan ~~...~~
+                s = s.replace(/~~([^~]+)~~/g, "<del>$1</del>");
+                return s;
+            }
 
-                item.innerHTML = `
-                    <div class="w-11 h-11 rounded-full bg-gradient-to-br ${chat.gradient || AVATAR_GRADIENTS[0]} flex items-center justify-center text-white font-bold text-sm flex-shrink-0 shadow-sm ${isActive ? "ring-2 ring-white/40" : ""}">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/>
-                        </svg>
-                    </div>
-                    <div class="flex-1 min-w-0 pr-5">
-                        <div class="flex items-center justify-between gap-2">
-                            <h3 class="font-semibold text-sm truncate ${isActive ? "text-white" : "text-slate-900 dark:text-white"}">
-                                ${escapeHtml(chat.title)}
-                            </h3>
-                            <span class="text-[11px] flex-shrink-0 ${isActive ? "text-white/80" : "text-slate-400 dark:text-slate-500"}">
-                                ${timeStr}
-                            </span>
-                        </div>
-                        <p class="text-xs truncate mt-0.5 ${isActive ? "text-white/85" : "text-slate-500 dark:text-slate-400"}">
-                            ${escapeHtml(previewText)}
-                        </p>
-                    </div>
-                    <button
-                        type="button"
-                        class="delete-chat-btn absolute right-2 top-1/2 -translate-y-1/2 p-1.5 rounded-full opacity-0 group-hover:opacity-100 focus:opacity-100 transition cursor-pointer ${
-                            isActive
-                                ? "hover:bg-white/20 text-white"
-                                : "hover:bg-red-100 dark:hover:bg-red-900/40 text-slate-400 hover:text-red-500"
-                        }"
-                        title="Chatni o'chirish"
-                    >
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
-                        </svg>
-                    </button>
-                `;
+            function renderMarkdown(rawText) {
+                if (!rawText) return "";
 
-                // Chatni tanlash
-                item.addEventListener("click", (e) => {
-                    if (e.target.closest(".delete-chat-btn")) return;
-                    state.activeChatId = chat.id;
-                    state.mobileView = "chat";
-                    saveState();
-                    renderAll();
+                // 1. Kod bloklarini ajratib olish
+                const codeBlocks = [];
+                let text = String(rawText).replace(/```([a-zA-Z0-9_+-]*)\n?([\s\S]*?)```/g, function (_, lang, code) {
+                    const index = codeBlocks.length;
+                    codeBlocks.push({
+                        lang: (lang || "kod").trim(),
+                        code: code.replace(/\n$/, "")
+                    });
+                    return "\n%%CODEBLOCK_" + index + "%%\n";
                 });
 
-                // Chatni o'chirish
-                const delBtn = item.querySelector(".delete-chat-btn");
-                delBtn.addEventListener("click", (e) => {
-                    e.stopPropagation();
-                    openConfirmModal(
-                        "Chatni o'chirish",
-                        `"${chat.title}" chatini va undagi barcha xabarlarni o'chirmoqchimisiz?`,
-                        "O'chirish",
-                        () => deleteChat(chat.id)
+                // 2. HTML belgilarni xavfsizlantirish
+                text = escapeHtml(text);
+
+                // 3. Inline kodlarni ajratib olish (`...`)
+                const inlineCodes = [];
+                text = text.replace(/`([^`\n]+)`/g, function (_, code) {
+                    const index = inlineCodes.length;
+                    inlineCodes.push(code);
+                    return "%%INLINECODE_" + index + "%%";
+                });
+
+                // 4. Qatorlar bo'yicha blok elementlarni yig'ish
+                const lines = text.split("\n");
+                const out = [];
+                let inUl = false;
+                let inOl = false;
+
+                function closeLists() {
+                    if (inUl) { out.push("</ul>"); inUl = false; }
+                    if (inOl) { out.push("</ol>"); inOl = false; }
+                }
+
+                for (let i = 0; i < lines.length; i++) {
+                    const line = lines[i];
+                    const trimmed = line.trim();
+
+                    if (/^%%CODEBLOCK_\d+%%$/.test(trimmed)) {
+                        closeLists();
+                        out.push(trimmed);
+                        continue;
+                    }
+
+                    if (/^###\s+(.+)$/.test(line)) {
+                        closeLists();
+                        out.push("<h3>" + formatInlineMarkdown(line.replace(/^###\s+/, "")) + "</h3>");
+                        continue;
+                    }
+                    if (/^##\s+(.+)$/.test(line)) {
+                        closeLists();
+                        out.push("<h2>" + formatInlineMarkdown(line.replace(/^##\s+/, "")) + "</h2>");
+                        continue;
+                    }
+                    if (/^#\s+(.+)$/.test(line)) {
+                        closeLists();
+                        out.push("<h1>" + formatInlineMarkdown(line.replace(/^#\s+/, "")) + "</h1>");
+                        continue;
+                    }
+                    if (/^&gt;\s?(.+)$/.test(line)) {
+                        closeLists();
+                        out.push("<blockquote>" + formatInlineMarkdown(line.replace(/^&gt;\s?/, "")) + "</blockquote>");
+                        continue;
+                    }
+                    if (/^\s*[-*•]\s+(.+)$/.test(line)) {
+                        if (inOl) { out.push("</ol>"); inOl = false; }
+                        if (!inUl) { out.push("<ul>"); inUl = true; }
+                        out.push("<li>" + formatInlineMarkdown(line.replace(/^\s*[-*•]\s+/, "")) + "</li>");
+                        continue;
+                    }
+                    if (/^\s*\d+\.\s+(.+)$/.test(line)) {
+                        if (inUl) { out.push("</ul>"); inUl = false; }
+                        if (!inOl) { out.push("<ol>"); inOl = true; }
+                        out.push("<li>" + formatInlineMarkdown(line.replace(/^\s*\d+\.\s+/, "")) + "</li>");
+                        continue;
+                    }
+                    if (trimmed === "") {
+                        closeLists();
+                        continue;
+                    }
+
+                    closeLists();
+                    out.push("<p>" + formatInlineMarkdown(line) + "</p>");
+                }
+                closeLists();
+
+                let html = out.join("");
+
+                // 5. Inline kodlarni qaytarish
+                html = html.replace(/%%INLINECODE_(\d+)%%/g, function (_, idx) {
+                    return '<code class="inline-code">' + inlineCodes[Number(idx)] + "</code>";
+                });
+
+                // 6. Kod bloklarini "Nusxalash" tugmasi bilan qaytarish
+                html = html.replace(/%%CODEBLOCK_(\d+)%%/g, function (_, idx) {
+                    const block = codeBlocks[Number(idx)];
+                    const encoded = encodeURIComponent(block.code);
+                    return (
+                        '<div class="code-block">' +
+                            '<div class="code-block-header">' +
+                                '<span class="code-lang">' + escapeHtml(block.lang) + "</span>" +
+                                '<button type="button" class="code-copy-btn" data-code="' + encoded + '">' +
+                                    '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
+                                        '<rect x="9" y="9" width="13" height="13" rx="2"></rect>' +
+                                        '<path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>' +
+                                    "</svg>" +
+                                    "<span>Nusxalash</span>" +
+                                "</button>" +
+                            "</div>" +
+                            "<pre><code>" + escapeHtml(block.code) + "</code></pre>" +
+                        "</div>"
                     );
                 });
 
-                els.chatList.appendChild(item);
-            });
-        }
-
-        // --- CHAT SARLAVHASI VA STATUSINI YANGILASH ---
-        function renderHeader() {
-            const chat = getActiveChat();
-            if (!chat) return;
-
-            els.headerTitle.textContent = chat.title;
-            els.headerAvatar.className = `w-10 h-10 rounded-full bg-gradient-to-br ${chat.gradient || AVATAR_GRADIENTS[0]} flex items-center justify-center text-white font-bold text-sm flex-shrink-0 shadow-sm relative`;
-
-            if (state.isGenerating) {
-                els.headerStatus.innerHTML = `
-                    <span class="inline-flex items-center gap-1 text-tg-blue dark:text-sky-400">
-                        <span>yozmoqda</span>
-                        <span class="inline-flex gap-0.5 pt-1">
-                            <span class="w-1 h-1 rounded-full bg-current typing-dot"></span>
-                            <span class="w-1 h-1 rounded-full bg-current typing-dot"></span>
-                            <span class="w-1 h-1 rounded-full bg-current typing-dot"></span>
-                        </span>
-                    </span>
-                `;
-            } else {
-                els.headerStatus.innerHTML = `<span>online</span>`;
+                return html;
             }
-        }
 
-        // --- XABARLAR OYNASINI CHIZISH ---
-        function renderMessages() {
-            const chat = getActiveChat();
-            if (!chat) return;
+            // ================= LOCALSTORAGE =================
+            function saveState() {
+                try {
+                    localStorage.setItem(STORAGE_KEYS.CHATS, JSON.stringify(state.chats));
+                    localStorage.setItem(STORAGE_KEYS.ACTIVE_ID, state.activeChatId || "");
+                    localStorage.setItem(STORAGE_KEYS.THEME, state.theme);
+                    localStorage.setItem(STORAGE_KEYS.API_KEY, state.customApiKey || "");
+                } catch (e) {
+                    // Xotira cheklangan muhitda xatolikni yumshoq o'tkazib yuborish
+                }
+            }
 
-            els.messagesInner.innerHTML = "";
+            function createChatObject(title, gradient) {
+                const now = new Date().toISOString();
+                return {
+                    id: createId("chat"),
+                    title: title || "Yangi suhbat",
+                    gradient: gradient || AVATAR_GRADIENTS[state.chats.length % AVATAR_GRADIENTS.length],
+                    createdAt: now,
+                    updatedAt: now,
+                    messages: []
+                };
+            }
 
-            // Sana ko'rsatkichi (Telegram uslubidagi shaffof yorliq)
-            const datePill = document.createElement("div");
-            datePill.className = "flex justify-center my-1";
-            datePill.innerHTML = `
-                <span class="px-3 py-1 rounded-full text-[11px] font-medium bg-slate-900/20 dark:bg-slate-900/55 text-white backdrop-blur-sm shadow-sm">
-                    Bugun
-                </span>
-            `;
-            els.messagesInner.appendChild(datePill);
+            function loadState() {
+                try {
+                    const savedTheme = localStorage.getItem(STORAGE_KEYS.THEME);
+                    if (savedTheme === "dark" || savedTheme === "light") {
+                        state.theme = savedTheme;
+                    } else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+                        state.theme = "dark";
+                    }
 
-            // Agar chat bo'sh bo'lsa — chiroyli kutib olish kartasi va savol namunalari
-            if (chat.messages.length === 0 && !state.isGenerating) {
-                const welcomeWrap = document.createElement("div");
-                welcomeWrap.className = "my-auto py-6 flex flex-col items-center justify-center text-center";
-                welcomeWrap.innerHTML = `
-                    <div class="bg-white/90 dark:bg-tg-darkSidebar/90 backdrop-blur-md rounded-3xl p-5 sm:p-7 max-w-lg w-full shadow-lg border border-white/60 dark:border-slate-700/60">
-                        <div class="w-16 h-16 mx-auto mb-3.5 rounded-full bg-gradient-to-tr from-[#229ED9] to-[#3390ec] flex items-center justify-center text-white shadow-md">
-                            <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z"/>
-                            </svg>
-                        </div>
-                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-1.5">Salom! Men TeleAI yordamchiman</h3>
-                        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mb-5 leading-relaxed">
-                            Dasturlash, ilm-fan, tarix, tarjima, biznes yoki kundalik hayotga oid istalgan savolingizni bering — aniq va amaliy javob beraman.
-                        </p>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-left" id="quickPromptsGrid"></div>
-                    </div>
-                `;
+                    const savedKey = localStorage.getItem(STORAGE_KEYS.API_KEY);
+                    if (savedKey) {
+                        state.customApiKey = savedKey.trim();
+                    }
 
-                const grid = welcomeWrap.querySelector("#quickPromptsGrid");
-                QUICK_PROMPTS.forEach(p => {
-                    const btn = document.createElement("button");
-                    btn.type = "button";
-                    btn.className = "p-3 rounded-2xl bg-slate-50 hover:bg-sky-50 dark:bg-[#202b36] dark:hover:bg-[#283644] border border-slate-200/80 dark:border-slate-700/60 transition text-left flex items-start gap-2.5 cursor-pointer active:scale-[0.98]";
-                    btn.innerHTML = `
-                        <span class="text-lg leading-none mt-0.5">${p.icon}</span>
-                        <div>
-                            <div class="text-xs font-semibold text-tg-blue dark:text-sky-400 mb-0.5">${p.title}</div>
-                            <div class="text-xs text-slate-700 dark:text-slate-200 leading-snug">${p.text}</div>
-                        </div>
-                    `;
-                    btn.addEventListener("click", () => {
-                        sendMessage(p.text);
-                    });
-                    grid.appendChild(btn);
+                    const savedChats = localStorage.getItem(STORAGE_KEYS.CHATS);
+                    if (savedChats) {
+                        const parsed = JSON.parse(savedChats);
+                        if (Array.isArray(parsed) && parsed.length > 0) {
+                            state.chats = parsed;
+                        }
+                    }
+
+                    const savedActiveId = localStorage.getItem(STORAGE_KEYS.ACTIVE_ID);
+                    if (savedActiveId && state.chats.some(function (c) { return c.id === savedActiveId; })) {
+                        state.activeChatId = savedActiveId;
+                    }
+                } catch (e) {
+                    state.chats = [];
+                }
+
+                if (state.chats.length === 0) {
+                    const initialChat = createChatObject("TeleAI — Sun'iy intellekt", AVATAR_GRADIENTS[0]);
+                    state.chats.push(initialChat);
+                    state.activeChatId = initialChat.id;
+                    saveState();
+                } else if (!state.activeChatId) {
+                    state.activeChatId = state.chats[0].id;
+                }
+            }
+
+            function getActiveChat() {
+                for (let i = 0; i < state.chats.length; i++) {
+                    if (state.chats[i].id === state.activeChatId) {
+                        return state.chats[i];
+                    }
+                }
+                return state.chats[0] || null;
+            }
+
+            // ================= UI CHIZISH (RENDER) =================
+            function applyTheme() {
+                document.documentElement.setAttribute("data-theme", state.theme);
+                if (state.theme === "dark") {
+                    els.themeIconSun.style.display = "block";
+                    els.themeIconMoon.style.display = "none";
+                } else {
+                    els.themeIconSun.style.display = "none";
+                    els.themeIconMoon.style.display = "block";
+                }
+            }
+
+            function applyMobileView() {
+                els.appShell.classList.remove("mobile-chat", "mobile-list");
+                els.appShell.classList.add(state.mobileView === "list" ? "mobile-list" : "mobile-chat");
+            }
+
+            function renderChatList() {
+                const query = state.searchQuery.trim().toLowerCase();
+                const sorted = state.chats.slice().sort(function (a, b) {
+                    return new Date(b.updatedAt) - new Date(a.updatedAt);
                 });
 
-                els.messagesInner.appendChild(welcomeWrap);
-                return;
+                const filtered = sorted.filter(function (chat) {
+                    if (!query) return true;
+                    if (chat.title.toLowerCase().indexOf(query) !== -1) return true;
+                    return chat.messages.some(function (m) {
+                        return m.text && m.text.toLowerCase().indexOf(query) !== -1;
+                    });
+                });
+
+                els.chatCountBadge.textContent = state.chats.length + " ta chat";
+                els.chatList.innerHTML = "";
+
+                if (filtered.length === 0) {
+                    els.chatList.innerHTML = '<div class="empty-list">Hech qanday chat topilmadi</div>';
+                    return;
+                }
+
+                filtered.forEach(function (chat) {
+                    const isActive = chat.id === state.activeChatId;
+                    const lastMsg = chat.messages.length > 0 ? chat.messages[chat.messages.length - 1] : null;
+                    const preview = lastMsg
+                        ? (lastMsg.role === "user" ? "Siz: " : "AI: ") + lastMsg.text.replace(/\s+/g, " ")
+                        : "Yangi suhbatni boshlang...";
+
+                    const item = document.createElement("div");
+                    item.className = "chat-item" + (isActive ? " active" : "");
+                    item.innerHTML =
+                        '<div class="chat-avatar" style="background:' + (chat.gradient || AVATAR_GRADIENTS[0]) + '">' +
+                            '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+                                '<path d="M12 3l1.9 5.8L20 10.7l-5.2 2.9L12 19.5l-2.8-5.9L4 10.7l6.1-1.9L12 3z"></path>' +
+                            "</svg>" +
+                        "</div>" +
+                        '<div class="chat-item-body">' +
+                            '<div class="chat-item-top">' +
+                                '<div class="chat-item-title">' + escapeHtml(chat.title) + "</div>" +
+                                '<div class="chat-item-time">' + formatChatTime(chat.updatedAt) + "</div>" +
+                            "</div>" +
+                            '<div class="chat-item-preview">' + escapeHtml(preview) + "</div>" +
+                        "</div>" +
+                        '<button type="button" class="chat-delete-btn" title="Chatni o\'chirish" aria-label="Chatni o\'chirish">' +
+                            '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">' +
+                                '<path d="M18 6L6 18M6 6l12 12"></path>' +
+                            "</svg>" +
+                        "</button>";
+
+                    item.addEventListener("click", function (e) {
+                        if (e.target.closest(".chat-delete-btn")) return;
+                        state.activeChatId = chat.id;
+                        state.mobileView = "chat";
+                        saveState();
+                        renderAll();
+                    });
+
+                    item.querySelector(".chat-delete-btn").addEventListener("click", function (e) {
+                        e.stopPropagation();
+                        openConfirm(
+                            "Chatni o'chirish",
+                            '"' + chat.title + '" chatini va undagi barcha xabarlarni o\'chirmoqchimisiz?',
+                            "O'chirish",
+                            function () { deleteChat(chat.id); }
+                        );
+                    });
+
+                    els.chatList.appendChild(item);
+                });
             }
 
-            // Barcha xabarlarni pufakcha ko'rinishida chizish
-            chat.messages.forEach(msg => {
-                const isUser = msg.role === "user";
-                const row = document.createElement("div");
-                row.className = `flex w-full msg-animate ${isUser ? "justify-end" : "justify-start"}`;
+            function renderHeader() {
+                const chat = getActiveChat();
+                if (!chat) return;
 
-                if (isUser) {
-                    row.innerHTML = `
-                        <div class="max-w-[85%] sm:max-w-[75%] rounded-2xl rounded-br-sm px-3.5 py-2.5 bg-tg-lightBubbleOut dark:bg-tg-darkBubbleOut text-slate-900 dark:text-white shadow-sm">
-                            <div class="text-sm sm:text-[15px] leading-relaxed whitespace-pre-wrap break-words">${escapeHtml(msg.text)}</div>
-                            <div class="flex items-center justify-end gap-1 mt-1 -mb-0.5">
-                                <span class="text-[10px] text-emerald-700/75 dark:text-sky-200/75">${formatTime(msg.timestamp)}</span>
-                                <!-- Telegram ko'k qo'shaloq galochka (✓✓) -->
-                                <svg class="w-4 h-4 text-[#3390ec] dark:text-sky-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M1.5 12.5l4.2 4.2L15 7.5"/>
-                                    <path d="M8.5 12.5l4.2 4.2L22 7.5"/>
-                                </svg>
-                            </div>
-                        </div>
-                    `;
+                els.headerAvatar.style.background = chat.gradient || AVATAR_GRADIENTS[0];
+                els.headerTitle.textContent = chat.title;
+
+                if (state.isGenerating) {
+                    els.headerStatus.innerHTML =
+                        '<span>yozmoqda</span>' +
+                        '<span class="typing-dots" style="margin-left:2px;">' +
+                            '<span class="typing-dot sm"></span>' +
+                            '<span class="typing-dot sm"></span>' +
+                            '<span class="typing-dot sm"></span>' +
+                        "</span>";
                 } else {
-                    const renderedHtml = renderMarkdown(msg.text);
-                    let sourcesHtml = "";
-                    if (msg.sources && msg.sources.length > 0) {
-                        const links = msg.sources.slice(0, 4).map(s => `
-                            <a href="${escapeHtml(s.uri)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] bg-slate-100 dark:bg-slate-800/90 text-tg-blue dark:text-sky-400 hover:underline max-w-[200px] truncate">
-                                <svg class="w-3 h-3 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101"/>
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.172 13.828a4 4 0 015.656 0l4-4a4 4 0 10-5.656-5.656l-1.1 1.1"/>
-                                </svg>
-                                <span class="truncate">${escapeHtml(s.title)}</span>
-                            </a>
-                        `).join("");
-                        sourcesHtml = `<div class="flex flex-wrap gap-1.5 mt-2.5 pt-2 border-t border-slate-100 dark:border-slate-700/60">${links}</div>`;
-                    }
-
-                    row.innerHTML = `
-                        <div class="max-w-[90%] sm:max-w-[80%] rounded-2xl rounded-bl-sm px-4 py-2.5 bg-white dark:bg-tg-darkBubbleIn text-slate-800 dark:text-slate-100 shadow-sm">
-                            <div class="md-content text-sm sm:text-[15px] break-words">${renderedHtml}</div>
-                            ${sourcesHtml}
-                            <div class="flex items-center justify-between gap-3 mt-2 pt-1">
-                                <button
-                                    type="button"
-                                    class="copy-msg-btn inline-flex items-center gap-1 text-[11px] text-slate-400 hover:text-tg-blue dark:hover:text-sky-400 transition cursor-pointer py-0.5"
-                                    title="Javobni nusxalash"
-                                >
-                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
-                                    </svg>
-                                    <span>Nusxalash</span>
-                                </button>
-                                <span class="text-[10px] text-slate-400 dark:text-slate-500">${formatTime(msg.timestamp)}</span>
-                            </div>
-                        </div>
-                    `;
-
-                    const copyBtn = row.querySelector(".copy-msg-btn");
-                    copyBtn.addEventListener("click", () => {
-                        copyToClipboard(msg.text, "AI javobi nusxalandi!");
-                    });
+                    els.headerStatus.textContent = "onlayn";
                 }
-
-                els.messagesInner.appendChild(row);
-            });
-
-            // Agar AI javob yozayotgan bo'lsa — 3 nuqta animatsiyali indikator
-            if (state.isGenerating) {
-                const typingRow = document.createElement("div");
-                typingRow.className = "flex justify-start w-full msg-animate";
-                typingRow.innerHTML = `
-                    <div class="rounded-2xl rounded-bl-sm px-4 py-3.5 bg-white dark:bg-tg-darkBubbleIn shadow-sm flex items-center gap-1.5">
-                        <span class="w-2 h-2 rounded-full bg-tg-blue dark:bg-sky-400 typing-dot"></span>
-                        <span class="w-2 h-2 rounded-full bg-tg-blue dark:bg-sky-400 typing-dot"></span>
-                        <span class="w-2 h-2 rounded-full bg-tg-blue dark:bg-sky-400 typing-dot"></span>
-                    </div>
-                `;
-                els.messagesInner.appendChild(typingRow);
             }
 
-            scrollToBottom();
-        }
+            function renderMessages() {
+                const chat = getActiveChat();
+                if (!chat) return;
 
-        function scrollToBottom() {
-            requestAnimationFrame(() => {
-                els.messagesContainer.scrollTop = els.messagesContainer.scrollHeight;
-            });
-        }
+                els.messagesInner.innerHTML = "";
 
-        function updateSendButtonState() {
-            els.sendBtn.disabled = state.isGenerating;
-            if (state.isGenerating) {
-                els.sendIcon.classList.add("hidden");
-                els.sendSpinner.classList.remove("hidden");
-            } else {
-                els.sendIcon.classList.remove("hidden");
-                els.sendSpinner.classList.add("hidden");
-            }
-        }
+                // Sana yorlig'i
+                const dateWrap = document.createElement("div");
+                dateWrap.className = "date-pill-wrap";
+                dateWrap.innerHTML = '<span class="date-pill">Bugun</span>';
+                els.messagesInner.appendChild(dateWrap);
 
-        function renderAll() {
-            applyTheme();
-            updateWebSearchUI();
-            updateResponsiveLayout();
-            renderChatList();
-            renderHeader();
-            renderMessages();
-            updateSendButtonState();
-        }
+                // Bo'sh chat bo'lsa — kutib olish kartasi
+                if (chat.messages.length === 0 && !state.isGenerating) {
+                    const wrap = document.createElement("div");
+                    wrap.className = "welcome-wrap";
+                    wrap.innerHTML =
+                        '<div class="welcome-card">' +
+                            '<div class="welcome-icon">' +
+                                '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">' +
+                                    '<path d="M12 3l1.9 5.8L20 10.7l-5.2 2.9L12 19.5l-2.8-5.9L4 10.7l6.1-1.9L12 3z"></path>' +
+                                "</svg>" +
+                            "</div>" +
+                            "<h2>Salom! Men TeleAI yordamchiman</h2>" +
+                            "<p>Dasturlash, biznes, tarjima, fan yoki kundalik hayotga oid istalgan savolingizni bering — aniq va amaliy javob beraman.</p>" +
+                            '<div class="prompts-grid" id="promptsGrid"></div>' +
+                        "</div>";
 
-        // --- CHAT AMALLARI ---
-        function createNewChat() {
-            const newChat = createChatObject(`Yangi suhbat #${state.chats.length + 1}`);
-            state.chats.unshift(newChat);
-            state.activeChatId = newChat.id;
-            state.mobileView = "chat";
-            saveState();
-            renderAll();
-            els.messageInput.focus();
-            showToast("Yangi chat ochildi");
-        }
-
-        function deleteChat(chatId) {
-            state.chats = state.chats.filter(c => c.id !== chatId);
-            if (state.chats.length === 0) {
-                const fallback = createChatObject("AI Yordamchi (Universal)", AVATAR_GRADIENTS[0]);
-                state.chats.push(fallback);
-                state.activeChatId = fallback.id;
-            } else if (state.activeChatId === chatId) {
-                state.activeChatId = state.chats[0].id;
-            }
-            saveState();
-            renderAll();
-            showToast("Chat o'chirildi");
-        }
-
-        function clearActiveChat() {
-            const chat = getActiveChat();
-            if (!chat) return;
-            chat.messages = [];
-            chat.updatedAt = new Date().toISOString();
-            saveState();
-            renderAll();
-            showToast("Chat tarixi tozalandi");
-        }
-
-        // --- GEMINI API BILAN BOG'LANISH (EXPONENTIAL BACKOFF) ---
-        async function fetchGeminiResponse(chatMessages, useSearch) {
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${apiKey}`;
-
-            // Oxirgi 20 ta xabarni kontekst sifatida yuborish
-            const recentMessages = chatMessages.slice(-20);
-            const contents = recentMessages.map(m => ({
-                role: m.role === "user" ? "user" : "model",
-                parts: [{ text: m.text }]
-            }));
-
-            const payload = {
-                contents,
-                systemInstruction: {
-                    parts: [{ text: SYSTEM_INSTRUCTION }]
-                }
-            };
-
-            if (useSearch) {
-                payload.tools = [{ google_search: {} }];
-            }
-
-            const maxRetries = 4;
-            let delay = 1000;
-
-            for (let attempt = 0; attempt <= maxRetries; attempt++) {
-                try {
-                    const response = await fetch(apiUrl, {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify(payload)
+                    const grid = wrap.querySelector("#promptsGrid");
+                    QUICK_PROMPTS.forEach(function (item) {
+                        const btn = document.createElement("button");
+                        btn.type = "button";
+                        btn.className = "prompt-btn";
+                        btn.innerHTML =
+                            '<span class="prompt-emoji">' + item.emoji + "</span>" +
+                            "<div>" +
+                                '<div class="prompt-title">' + escapeHtml(item.title) + "</div>" +
+                                '<div class="prompt-text">' + escapeHtml(item.text) + "</div>" +
+                            "</div>";
+                        btn.addEventListener("click", function () {
+                            sendMessage(item.text);
+                        });
+                        grid.appendChild(btn);
                     });
 
-                    if (!response.ok) {
-                        if ((response.status === 429 || response.status >= 500) && attempt < maxRetries) {
-                            await new Promise(res => setTimeout(res, delay));
-                            delay *= 2;
-                            continue;
-                        }
-                        throw new Error(`HTTP ${response.status}`);
-                    }
-
-                    const result = await response.json();
-                    const candidate = result?.candidates?.[0];
-                    const text = candidate?.content?.parts?.map(p => p.text || "").join("") || "";
-
-                    if (!text) {
-                        throw new Error("Bo'sh javob");
-                    }
-
-                    // Agar Google Search ishlatilgan bo'lsa, manbalarni ajratib olish
-                    let sources = [];
-                    const groundingMetadata = candidate?.groundingMetadata;
-                    if (groundingMetadata?.groundingChunks) {
-                        sources = groundingMetadata.groundingChunks
-                            .map(chunk => ({
-                                uri: chunk.web?.uri,
-                                title: chunk.web?.title
-                            }))
-                            .filter(s => s.uri && s.title);
-                    } else if (groundingMetadata?.groundingAttributions) {
-                        sources = groundingMetadata.groundingAttributions
-                            .map(attr => ({
-                                uri: attr.web?.uri,
-                                title: attr.web?.title
-                            }))
-                            .filter(s => s.uri && s.title);
-                    }
-
-                    // Takroriy manbalarni olib tashlash
-                    const uniqueSources = [];
-                    const seenUris = new Set();
-                    for (const s of sources) {
-                        if (!seenUris.has(s.uri)) {
-                            seenUris.add(s.uri);
-                            uniqueSources.push(s);
-                        }
-                    }
-
-                    return { text, sources: uniqueSources };
-                } catch (err) {
-                    if (attempt < maxRetries) {
-                        await new Promise(res => setTimeout(res, delay));
-                        delay *= 2;
-                        continue;
-                    }
-                    throw err;
+                    els.messagesInner.appendChild(wrap);
+                    return;
                 }
+
+                // Xabarlarni chiqarish
+                chat.messages.forEach(function (msg) {
+                    const row = document.createElement("div");
+                    row.className = "msg-row " + (msg.role === "user" ? "user" : "model");
+
+                    if (msg.role === "user") {
+                        row.innerHTML =
+                            '<div class="bubble user">' +
+                                '<div class="user-text">' + escapeHtml(msg.text) + "</div>" +
+                                '<div class="msg-meta">' +
+                                    '<span class="msg-time">' + formatTime(msg.timestamp) + "</span>" +
+                                    '<span class="ticks" title="O\'qildi">' +
+                                        '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">' +
+                                            '<path d="M1.5 12.5l4.2 4.2L15 7.5"></path>' +
+                                            '<path d="M8.5 12.5l4.2 4.2L22 7.5"></path>' +
+                                        "</svg>" +
+                                    "</span>" +
+                                "</div>" +
+                            "</div>";
+                    } else if (msg.isError) {
+                        row.innerHTML =
+                            '<div class="bubble model error">' +
+                                '<div class="md-content"><p>' + escapeHtml(msg.text) + "</p></div>" +
+                                '<button type="button" class="retry-btn">' +
+                                    '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">' +
+                                        '<polyline points="23 4 23 10 17 10"></polyline>' +
+                                        '<path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>' +
+                                    "</svg>" +
+                                    "<span>Qayta urinish</span>" +
+                                "</button>" +
+                                '<div class="msg-meta">' +
+                                    '<span class="msg-time">' + formatTime(msg.timestamp) + "</span>" +
+                                "</div>" +
+                            "</div>";
+
+                        row.querySelector(".retry-btn").addEventListener("click", function () {
+                            retryLastMessage(msg.id);
+                        });
+                    } else {
+                        row.innerHTML =
+                            '<div class="bubble model">' +
+                                '<div class="md-content">' + renderMarkdown(msg.text) + "</div>" +
+                                '<div class="msg-meta model-meta">' +
+                                    '<button type="button" class="copy-btn" title="Javobni nusxalash">' +
+                                        '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
+                                            '<rect x="9" y="9" width="13" height="13" rx="2"></rect>' +
+                                            '<path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>' +
+                                        "</svg>" +
+                                        "<span>Nusxalash</span>" +
+                                    "</button>" +
+                                    '<span class="msg-time">' + formatTime(msg.timestamp) + "</span>" +
+                                "</div>" +
+                            "</div>";
+
+                        row.querySelector(".copy-btn").addEventListener("click", function () {
+                            copyText(msg.text, "Javob nusxalandi!");
+                        });
+
+                        // Kod bloklari ichidagi "Nusxalash" tugmalarini ulash
+                        const codeBtns = row.querySelectorAll(".code-copy-btn");
+                        codeBtns.forEach(function (btn) {
+                            btn.addEventListener("click", function () {
+                                const code = decodeURIComponent(btn.getAttribute("data-code") || "");
+                                copyText(code, "Kod nusxalandi!");
+                                const label = btn.querySelector("span");
+                                if (label) {
+                                    label.textContent = "Nusxalandi ✓";
+                                    setTimeout(function () { label.textContent = "Nusxalash"; }, 1600);
+                                }
+                            });
+                        });
+                    }
+
+                    els.messagesInner.appendChild(row);
+                });
+
+                // Yozmoqda... indikatori
+                if (state.isGenerating) {
+                    const typingRow = document.createElement("div");
+                    typingRow.className = "msg-row model";
+                    typingRow.innerHTML =
+                        '<div class="bubble model" style="padding: 13px 16px;">' +
+                            '<div class="typing-dots">' +
+                                '<span class="typing-dot"></span>' +
+                                '<span class="typing-dot"></span>' +
+                                '<span class="typing-dot"></span>' +
+                            "</div>" +
+                        "</div>";
+                    els.messagesInner.appendChild(typingRow);
+                }
+
+                scrollToBottom();
             }
-        }
 
-        // --- XABAR YUBORISH ---
-        async function sendMessage(overrideText = null) {
-            if (state.isGenerating) return;
-
-            const text = (overrideText !== null ? overrideText : els.messageInput.value).trim();
-            if (!text) return;
-
-            const chat = getActiveChat();
-            if (!chat) return;
-
-            // Agar yangi chatda birinchi xabar bo'lsa, sarlavhani avtomatik nomlash
-            if (chat.messages.length === 0 && chat.title.startsWith("Yangi suhbat")) {
-                chat.title = text.length > 32 ? text.slice(0, 32) + "..." : text;
+            function scrollToBottom() {
+                requestAnimationFrame(function () {
+                    els.messagesViewport.scrollTop = els.messagesViewport.scrollHeight;
+                });
             }
 
-            // Foydalanuvchi xabarini qo'shish
-            const userMsg = {
-                id: generateId(),
-                role: "user",
-                text,
-                timestamp: new Date().toISOString()
-            };
-            chat.messages.push(userMsg);
-            chat.updatedAt = userMsg.timestamp;
-
-            // Inputni tozalash
-            if (overrideText === null) {
-                els.messageInput.value = "";
-                autoResizeTextarea();
+            function updateSendState() {
+                els.sendBtn.disabled = state.isGenerating;
+                els.sendIcon.style.display = state.isGenerating ? "none" : "block";
+                els.sendSpinner.style.display = state.isGenerating ? "block" : "none";
             }
 
-            state.isGenerating = true;
-            saveState();
-            renderChatList();
-            renderHeader();
-            renderMessages();
-            updateSendButtonState();
-
-            try {
-                const { text: aiText, sources } = await fetchGeminiResponse(chat.messages, state.webSearch);
-
-                const aiMsg = {
-                    id: generateId(),
-                    role: "model",
-                    text: aiText,
-                    sources,
-                    timestamp: new Date().toISOString()
-                };
-                chat.messages.push(aiMsg);
-                chat.updatedAt = aiMsg.timestamp;
-            } catch (error) {
-                const errorMsg = {
-                    id: generateId(),
-                    role: "model",
-                    text: "Kechirasiz, javob olishda vaqtinchalik texnik xatolik yuz berdi. Iltimos, birozdan so'ng qayta urinib ko'ring.",
-                    timestamp: new Date().toISOString()
-                };
-                chat.messages.push(errorMsg);
-                chat.updatedAt = errorMsg.timestamp;
-                showToast("Aloqa xatoligi yuz berdi");
-            } finally {
-                state.isGenerating = false;
-                saveState();
+            function renderAll() {
+                applyTheme();
+                applyMobileView();
                 renderChatList();
                 renderHeader();
                 renderMessages();
-                updateSendButtonState();
+                updateSendState();
             }
-        }
 
-        // Textarea balandligini matnga qarab moslash
-        function autoResizeTextarea() {
-            els.messageInput.style.height = "auto";
-            els.messageInput.style.height = Math.min(els.messageInput.scrollHeight, 144) + "px";
-        }
-
-        // --- HODISALARNI ULASH (EVENT LISTENERS) ---
-        function bindEvents() {
-            // Yangi chat
-            els.newChatBtn.addEventListener("click", createNewChat);
-
-            // Qidiruv
-            els.searchInput.addEventListener("input", (e) => {
-                state.searchQuery = e.target.value;
-                els.clearSearchBtn.classList.toggle("hidden", !state.searchQuery);
-                renderChatList();
-            });
-
-            els.clearSearchBtn.addEventListener("click", () => {
-                state.searchQuery = "";
-                els.searchInput.value = "";
-                els.clearSearchBtn.classList.add("hidden");
-                renderChatList();
-                els.searchInput.focus();
-            });
-
-            // Mobil orqaga qaytish tugmasi
-            els.mobileBackBtn.addEventListener("click", () => {
-                state.mobileView = "list";
-                updateResponsiveLayout();
-            });
-
-            // Web Search toggle
-            els.webSearchToggle.addEventListener("click", () => {
-                state.webSearch = !state.webSearch;
+            // ================= CHAT AMALLARI =================
+            function createNewChat() {
+                if (state.isGenerating) return;
+                const newChat = createChatObject("Yangi suhbat #" + (state.chats.length + 1));
+                state.chats.unshift(newChat);
+                state.activeChatId = newChat.id;
+                state.mobileView = "chat";
                 saveState();
-                updateWebSearchUI();
-                showToast(state.webSearch ? "Internetdan qidirish yoqildi" : "Internetdan qidirish o'chirildi");
-            });
+                renderAll();
+                els.messageInput.focus();
+                showToast("Yangi chat ochildi");
+            }
 
-            // Kun / Tun rejimi
-            els.themeToggleBtn.addEventListener("click", () => {
-                state.theme = state.theme === "dark" ? "light" : "dark";
+            function deleteChat(chatId) {
+                state.chats = state.chats.filter(function (c) { return c.id !== chatId; });
+                if (state.chats.length === 0) {
+                    const fallback = createChatObject("TeleAI — Sun'iy intellekt", AVATAR_GRADIENTS[0]);
+                    state.chats.push(fallback);
+                    state.activeChatId = fallback.id;
+                } else if (state.activeChatId === chatId) {
+                    state.activeChatId = state.chats[0].id;
+                }
                 saveState();
-                applyTheme();
-            });
+                renderAll();
+                showToast("Chat o'chirildi");
+            }
 
-            // Chatni tozalash
-            els.clearChatBtn.addEventListener("click", () => {
+            function clearActiveChat() {
                 const chat = getActiveChat();
-                if (!chat || chat.messages.length === 0) {
-                    showToast("Chat allaqachon bo'sh");
-                    return;
-                }
-                openConfirmModal(
-                    "Chatni tozalash",
-                    "Ushbu chatdagi barcha xabarlar tarixini tozalamoqchimisiz?",
-                    "Tozalash",
-                    clearActiveChat
-                );
-            });
+                if (!chat) return;
+                chat.messages = [];
+                chat.updatedAt = new Date().toISOString();
+                saveState();
+                renderAll();
+                showToast("Chat tarixi tozalandi");
+            }
 
-            // Modal tugmalari
-            els.modalCancelBtn.addEventListener("click", closeConfirmModal);
-            els.confirmModal.addEventListener("click", (e) => {
-                if (e.target === els.confirmModal) closeConfirmModal();
-            });
-            els.modalConfirmBtn.addEventListener("click", () => {
-                if (typeof state.pendingModalAction === "function") {
-                    state.pendingModalAction();
-                }
-                closeConfirmModal();
-            });
+            // ================= GEMINI API CHAQIRUVI =================
+            function buildGeminiContents(messages) {
+                // Faqat bo'sh bo'lmagan va xatolik bo'lmagan oxirgi 20 ta xabarni yig'ish
+                const valid = messages
+                    .filter(function (m) {
+                        return !m.isError && typeof m.text === "string" && m.text.trim().length > 0;
+                    })
+                    .slice(-20);
 
-            // Xabar yuborish
-            els.sendBtn.addEventListener("click", () => sendMessage());
-            els.messageInput.addEventListener("input", autoResizeTextarea);
-            els.messageInput.addEventListener("keydown", (e) => {
-                if (e.key === "Enter" && !e.shiftKey) {
-                    e.preventDefault();
+                // Gemini API qoidasi: bir xil role ketma-ket kelmasligi kerak, birinchi xabar 'user' bo'lishi kerak
+                const contents = [];
+                for (let i = 0; i < valid.length; i++) {
+                    const role = valid[i].role === "user" ? "user" : "model";
+                    const text = valid[i].text.trim();
+
+                    if (contents.length === 0 && role !== "user") {
+                        continue;
+                    }
+
+                    if (contents.length > 0 && contents[contents.length - 1].role === role) {
+                        contents[contents.length - 1].parts[0].text += "\n\n" + text;
+                    } else {
+                        contents.push({
+                            role: role,
+                            parts: [{ text: text }]
+                        });
+                    }
+                }
+                return contents;
+            }
+
+            async function requestGeminiReply(messages) {
+                const key = state.customApiKey ? state.customApiKey.trim() : "";
+                const apiUrl = "https://generativelanguage.googleapis.com/v1beta/models/" +
+                    GEMINI_MODEL + ":generateContent?key=" + encodeURIComponent(key);
+
+                const contents = buildGeminiContents(messages);
+                if (contents.length === 0) {
+                    throw new Error("EMPTY_CONTENTS");
+                }
+
+                const payload = {
+                    contents: contents,
+                    systemInstruction: {
+                        parts: [{ text: SYSTEM_INSTRUCTION }]
+                    }
+                };
+
+                const maxRetries = 3;
+                let delay = 1000;
+
+                for (let attempt = 0; attempt <= maxRetries; attempt++) {
+                    try {
+                        const response = await fetch(apiUrl, {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify(payload)
+                        });
+
+                        if (!response.ok) {
+                            if ((response.status === 429 || response.status >= 500) && attempt < maxRetries) {
+                                await new Promise(function (r) { setTimeout(r, delay); });
+                                delay *= 2;
+                                continue;
+                            }
+                            const err = new Error("HTTP_" + response.status);
+                            err.status = response.status;
+                            throw err;
+                        }
+
+                        const data = await response.json();
+                        const parts = data && data.candidates && data.candidates[0] &&
+                            data.candidates[0].content && data.candidates[0].content.parts;
+
+                        const replyText = Array.isArray(parts)
+                            ? parts.map(function (p) { return p.text || ""; }).join("").trim()
+                            : "";
+
+                        if (!replyText) {
+                            throw new Error("EMPTY_RESPONSE");
+                        }
+
+                        return replyText;
+                    } catch (err) {
+                        if (attempt < maxRetries && (!err.status || err.status === 429 || err.status >= 500)) {
+                            await new Promise(function (r) { setTimeout(r, delay); });
+                            delay *= 2;
+                            continue;
+                        }
+                        throw err;
+                    }
+                }
+            }
+
+            function getFriendlyErrorMessage(err) {
+                if (err && (err.status === 400 || err.status === 401 || err.status === 403)) {
+                    return "API kalit bilan bog'liq xatolik yuz berdi. Agar faylni kompyuteringizda ochgan bo'lsangiz, chap paneldagi Sozlamalar (⚙️) bo'limiga haqiqiy Gemini API kalitingizni kiriting.";
+                }
+                if (err && err.status === 429) {
+                    return "So'rovlar soni vaqtincha cheklandi. Iltimos, bir necha soniyadan so'ng qayta urinib ko'ring.";
+                }
+                return "Server bilan bog'lanishda xatolik yuz berdi. Internet aloqangizni tekshiring va qayta urinib ko'ring.";
+            }
+
+            async function generateReplyForChat(chat) {
+                state.isGenerating = true;
+                renderHeader();
+                renderMessages();
+                updateSendState();
+
+                try {
+                    const replyText = await requestGeminiReply(chat.messages);
+                    const aiMsg = {
+                        id: createId("msg"),
+                        role: "model",
+                        text: replyText,
+                        timestamp: new Date().toISOString()
+                    };
+                    chat.messages.push(aiMsg);
+                    chat.updatedAt = aiMsg.timestamp;
+                } catch (err) {
+                    const errMsg = {
+                        id: createId("err"),
+                        role: "model",
+                        isError: true,
+                        text: getFriendlyErrorMessage(err),
+                        timestamp: new Date().toISOString()
+                    };
+                    chat.messages.push(errMsg);
+                    chat.updatedAt = errMsg.timestamp;
+                } finally {
+                    state.isGenerating = false;
+                    saveState();
+                    renderChatList();
+                    renderHeader();
+                    renderMessages();
+                    updateSendState();
+                }
+            }
+
+            async function sendMessage(overrideText) {
+                if (state.isGenerating) return;
+
+                const raw = typeof overrideText === "string" ? overrideText : els.messageInput.value;
+                const text = raw.trim();
+                if (!text) return;
+
+                const chat = getActiveChat();
+                if (!chat) return;
+
+                // Oxirgi xatolik pufakchasini tozalab yuborish (agar mavjud bo'lsa)
+                if (chat.messages.length > 0 && chat.messages[chat.messages.length - 1].isError) {
+                    chat.messages.pop();
+                }
+
+                // Birinchi xabarda yangi chat nomini avtomatik qo'yish
+                if (chat.messages.length === 0 && chat.title.indexOf("Yangi suhbat") === 0) {
+                    chat.title = text.length > 32 ? text.slice(0, 32) + "..." : text;
+                }
+
+                const userMsg = {
+                    id: createId("msg"),
+                    role: "user",
+                    text: text,
+                    timestamp: new Date().toISOString()
+                };
+                chat.messages.push(userMsg);
+                chat.updatedAt = userMsg.timestamp;
+
+                if (typeof overrideText !== "string") {
+                    els.messageInput.value = "";
+                    autoResizeInput();
+                }
+
+                saveState();
+                renderChatList();
+                await generateReplyForChat(chat);
+            }
+
+            async function retryLastMessage(errorMsgId) {
+                if (state.isGenerating) return;
+                const chat = getActiveChat();
+                if (!chat) return;
+
+                chat.messages = chat.messages.filter(function (m) { return m.id !== errorMsgId; });
+                saveState();
+                await generateReplyForChat(chat);
+            }
+
+            // ================= MODALLAR =================
+            function openSettings() {
+                els.apiKeyInput.value = state.customApiKey || "";
+                els.settingsModal.classList.add("open");
+                setTimeout(function () { els.apiKeyInput.focus(); }, 60);
+            }
+
+            function closeSettings() {
+                els.settingsModal.classList.remove("open");
+            }
+
+            function openConfirm(title, desc, okLabel, onOk) {
+                els.confirmTitle.textContent = title;
+                els.confirmDesc.textContent = desc;
+                els.confirmOkBtn.textContent = okLabel || "Tasdiqlash";
+                state.pendingConfirm = onOk;
+                els.confirmModal.classList.add("open");
+            }
+
+            function closeConfirm() {
+                els.confirmModal.classList.remove("open");
+                state.pendingConfirm = null;
+            }
+
+            function autoResizeInput() {
+                els.messageInput.style.height = "auto";
+                els.messageInput.style.height = Math.min(els.messageInput.scrollHeight, 140) + "px";
+            }
+
+            // ================= HODISALARNI ULASH =================
+            function bindEvents() {
+                els.themeToggleBtn.addEventListener("click", function () {
+                    state.theme = state.theme === "dark" ? "light" : "dark";
+                    saveState();
+                    applyTheme();
+                });
+
+                els.newChatBtn.addEventListener("click", createNewChat);
+
+                els.searchInput.addEventListener("input", function (e) {
+                    state.searchQuery = e.target.value;
+                    els.searchClearBtn.classList.toggle("visible", state.searchQuery.length > 0);
+                    renderChatList();
+                });
+
+                els.searchClearBtn.addEventListener("click", function () {
+                    state.searchQuery = "";
+                    els.searchInput.value = "";
+                    els.searchClearBtn.classList.remove("visible");
+                    renderChatList();
+                    els.searchInput.focus();
+                });
+
+                els.mobileBackBtn.addEventListener("click", function () {
+                    state.mobileView = "list";
+                    applyMobileView();
+                });
+
+                els.clearChatBtn.addEventListener("click", function () {
+                    const chat = getActiveChat();
+                    if (!chat || chat.messages.length === 0) {
+                        showToast("Chat allaqachon bo'sh");
+                        return;
+                    }
+                    openConfirm(
+                        "Chatni tozalash",
+                        "Ushbu chatdagi barcha xabarlarni tozalamoqchimisiz?",
+                        "Tozalash",
+                        clearActiveChat
+                    );
+                });
+
+                // Sozlamalar modali
+                els.settingsBtn.addEventListener("click", openSettings);
+                els.closeSettingsBtn.addEventListener("click", closeSettings);
+                els.settingsModal.addEventListener("click", function (e) {
+                    if (e.target === els.settingsModal) closeSettings();
+                });
+                els.saveSettingsBtn.addEventListener("click", function () {
+                    state.customApiKey = els.apiKeyInput.value.trim();
+                    saveState();
+                    closeSettings();
+                    showToast(state.customApiKey ? "API kaliti saqlandi" : "Standart rejim faollashtirildi");
+                });
+                els.clearApiKeyBtn.addEventListener("click", function () {
+                    state.customApiKey = "";
+                    els.apiKeyInput.value = "";
+                    saveState();
+                    showToast("API kaliti o'chirildi");
+                });
+
+                // Tasdiqlash modali
+                els.confirmCancelBtn.addEventListener("click", closeConfirm);
+                els.confirmModal.addEventListener("click", function (e) {
+                    if (e.target === els.confirmModal) closeConfirm();
+                });
+                els.confirmOkBtn.addEventListener("click", function () {
+                    if (typeof state.pendingConfirm === "function") {
+                        state.pendingConfirm();
+                    }
+                    closeConfirm();
+                });
+
+                // Xabar yuborish
+                els.sendBtn.addEventListener("click", function () {
                     sendMessage();
-                }
+                });
+
+                els.messageInput.addEventListener("input", autoResizeInput);
+                els.messageInput.addEventListener("keydown", function (e) {
+                    if (e.key === "Enter" && !e.shiftKey) {
+                        e.preventDefault();
+                        sendMessage();
+                    }
+                });
+
+                // Escape tugmasi bilan modallarni yopish
+                document.addEventListener("keydown", function (e) {
+                    if (e.key === "Escape") {
+                        closeSettings();
+                        closeConfirm();
+                    }
+                });
+            }
+
+            // ================= ISHGA TUSHIRISH =================
+            document.addEventListener("DOMContentLoaded", function () {
+                loadState();
+                bindEvents();
+                renderAll();
             });
-
-            // Ekran o'lchami o'zgarganda responsive holatni yangilash
-            window.addEventListener("resize", updateResponsiveLayout);
-        }
-
-        // --- ILOVANI ISHGA TUSHIRISH ---
-        window.addEventListener("DOMContentLoaded", () => {
-            loadState();
-            bindEvents();
-            renderAll();
-        });
+        })();
     </script>
 </body>
 </html>
